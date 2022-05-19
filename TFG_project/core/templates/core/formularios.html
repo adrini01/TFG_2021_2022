@@ -1,0 +1,1770 @@
+{% load static %}
+<html lang="es">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'core/css/formulario_style.css' %}" />
+	<script type="text/javascript" src="{% static 'core/js/pestanias_form.js' %}"></script>
+	<script type="text/javascript" src="{% static 'core/vendor/jQuery.js' %}"></script>
+	<script type="text/javascript" src="{% static 'core/vendor/dist/jspdf.min.js' %}"></script>
+	<meta charset="UTF-8">
+	<title>Inicio</title>
+</head>
+
+<body onload="javascript:cambiarPestanna('{{pestania}}',6);">
+	<script type="text/javascript" src="{% static 'core/vendor/jQuery.js' %}"></script>
+	<script>
+		var aux;
+		$(document).ready(function(){
+			$('input').each(function(){
+				// if($(this).attr("name") == "PSA_total"){
+				// 	aux = '{{paciente.PSA_total}}'
+				// 	$(this).val(parseFloat(aux.replace(',', '.')));
+				// }
+				// else if($(this).attr("name") == "PSAl_PSAt"){
+				// 	aux = '{{paciente.PSAl_PSAt}}'
+				// 	$(this).val(parseFloat(aux.replace(',', '.')));
+				// }
+				// else 
+				if($(this).attr("name") == "TDDUPRE"){
+					aux = '{{paciente.TDDUPRE}}'
+					$(this).val(parseFloat(aux.replace(',', '.')));
+				}
+				else if($(this).attr("name") == "Diam_max"){
+					aux = '{{paciente.Diam_max}}'
+					$(this).val(parseFloat(aux.replace(',', '.')));
+				}
+				else if($(this).attr("name") == "Por_cores_pos"){
+					aux = '{{paciente.Por_cores_pos}}'
+					$(this).val(parseFloat(aux.replace(',', '.')));
+				}
+				else if($(this).attr("name") == "N_biopsias"){
+					aux = '{{paciente.N_biopsias}}'
+					$(this).val(parseFloat(aux.replace(',', '.')));
+				}
+				else if($(this).attr("name") == "Gleason_pri"){
+					aux = '{{paciente.Gleason_pri}}'
+					$(this).val(parseFloat(aux.replace(',', '.')));
+				}
+				else if($(this).attr("name") == "Gleason_sec"){
+					aux = '{{paciente.Gleason_sec}}'
+					$(this).val(parseFloat(aux.replace(',', '.')));
+				}
+				else if($(this).attr("name") == "Por_cil_pos"){
+					aux = '{{paciente.Por_cil_pos}}'
+					$(this).val(parseFloat(aux.replace(',', '.')));
+				}
+				else if($(this).attr("name") == "Max_afeccion"){
+					aux = '{{paciente.Max_afeccion}}'
+					$(this).val(parseFloat(aux.replace(',', '.')));
+				}
+				else if($(this).attr("name") == "ISUP"){
+					aux = '{{paciente.ISUP}}'
+					$(this).val(parseFloat(aux.replace(',', '.')));
+				}
+				else if($(this).attr("name") == "Gleason_pri_2"){
+					aux = '{{paciente.Gleason_pri_2}}'
+					$(this).val(parseFloat(aux.replace(',', '.')));
+				}
+				else if($(this).attr("name") == "Gleason_sec_2"){
+					aux = '{{paciente.Gleason_sec_2}}'
+					$(this).val(parseFloat(aux.replace(',', '.')));
+				}
+				else if($(this).attr("name") == "Volumen_tumoral"){
+					aux = '{{paciente.Volumen_tumoral}}'
+					$(this).val(parseFloat(aux.replace(',', '.')));
+				}
+				// else if($(this).attr("name") == "PSA_pos"){
+				// 	aux = '{{paciente.PSA_pos}}'
+				// 	$(this).val(parseFloat(aux.replace(',', '.')));
+				// }
+				else if($(this).attr("name") == "T1_MTX"){
+					aux = '{{paciente.T1_MTX}}'
+					$(this).val(parseFloat(aux.replace(',', '.')));
+				}
+				// else if($(this).attr("name") == "TSEG"){
+				// 	aux = '{{paciente.TSEG}}'
+				// 	$(this).val(parseFloat(aux.replace(',', '.')));
+				// }
+				// else if($(this).attr("name") == "Ultimo_PSA"){
+				// 	aux = '{{paciente.Ultimo_PSA}}'
+				// 	$(this).val(parseFloat(aux.replace(',', '.')));
+				// }
+				else if($(this).attr("name") == "Edad"){
+					aux = '{{paciente.Edad}}'
+					$(this).val(parseFloat(aux.replace(',', '.')));
+				}
+			});
+		});
+	</script>
+	<script>
+		function num2string(campo) {
+			if (campo == 'Etnia') {
+				return etniaArray = ['', 'Caucásico', 'Negro', 'Hispano', 'Asiático'];
+				return etniaArray[valor];
+			} else if (campo == 'Obesidad') {
+				return obesidadArray = ['', 'NC', 'IMC < 25', 'IMC 25-30', 'IMC > 30'];
+				return obesidadArray[valor];
+			} else if (campo == 'HTA') {
+				return htaArray = ['', 'Sí', 'No', 'NC'];
+				return htaArray[valor];
+			} else if (campo == 'Diabetes') {
+				return diabetesArray = ['', 'Sí', 'No', 'NC'];
+				return diabetesArray[valor];
+			} else if (campo == 'Tabaco') {
+				return tabacoArray = ['', 'NC', 'No', 'Exfumador', '< 10 cig/día', '10-20 cig/día', '> 20 cig/día'];
+				return tabacoArray[valor];
+			} else if (campo == 'Familiar_CAP') {
+				return familiarArray = ['', 'Sí', 'No'];
+				return familiarArray[valor];
+			} else if (campo == 'TR_preop') {
+				return trArray = ['', 'Negativo', 'Sospechoso', 'Positivo'];
+				return trArray[valor];
+			} else if (campo == 'Estadiaje_RM') {
+				return estadiajeArray = ['', 'T2', 'T3a', 'T3b', 'T4', 'NA'];
+				return estadiajeArray[valor];
+			} else if (campo == 'ISUP_RM') {
+				return isupArray = ['', '0', '1', '2', '3', '4', '5'];
+				return isupArray[valor];
+			} else if (campo == 'Tipo_histologico') {
+				return histoArray = ['', 'Adenocarcinoma', 'Otro'];
+				return histoArray[valor];
+			} else if (campo == 'Gleason_biopsia') {
+				return gleasonArray = ['', '6', '7 (3+4)', '7 (4+3)', '8-10', 'Inclasificable'];
+				return gleasonArray[valor];
+			} else if (campo == 'Bilat') {
+				return bilatArray = ['', 'Sí', 'No', 'NC'];
+				return bilatArray[valor];
+			} else if (campo == 'IPN') {
+				return ipnArray = ['', 'Sí', 'No', 'NC'];
+				return ipnArray[valor];
+			} else if (campo == 'ILINF') {
+				return ilinfArray = ['', 'Sí', 'No', 'NC'];
+				return ilinfArray[valor];
+			} else if (campo == 'IVASC') {
+				return ivascArray = ['', 'Sí', 'No', 'NC'];
+				return ivascArray[valor];
+			} else if (campo == 'cTNM_biopsia') {
+				return ctnmArray = ['', 'cT1', 'cT2a', 'cT2b', 'cT2c', 'cT3a', 'cT3b', 'cT4'];
+				return ctnmArray[valor];
+			} else if (campo == 'Tratamiento') {
+				return tratamientoArray = ['', 'Prostatectomía', 'Radioterapia'];
+				return tratamientoArray[valor];
+			} else if (campo == 'Gleason_pieza_PRL') {
+				return gleason2Array = ['', '6', '7 (3+4)', '7 (4+3)', '8-10', '< 6'];
+				return gleason2Array[valor];
+			} else if (campo == 'Bilat_2') {
+				return bilat2Array = ['', 'Sí', 'No'];
+				return bilat2Array[valor];
+			} else if (campo == 'Localiz_en_pieza') {
+				return localArray = ['', 'ZP', 'ZT', 'ZFMA', 'Múltiple'];
+				return localArray[valor];
+			} else if (campo == 'Multifocalidad') {
+				return multiArray = ['', 'Sí', 'No'];
+				return multiArray[valor];
+			} else if (campo == 'EEC') {
+				return eecArray = ['', 'Sí', 'No'];
+				return eecArray[valor];
+			} else if (campo == 'IVS') {
+				return ivsArray = ['', 'Sí', 'No', 'NC'];
+				return ivsArray[valor];
+			} else if (campo == 'IPN_pieza') {
+				return ipn2Array = ['', 'Sí', 'No', 'NC'];
+				return ipn2Array[valor];
+			} else if (campo == 'ILINF_pieza') {
+				return ilinf2Array = ['', 'Sí', 'No', 'NC'];
+				return ilinf2Array[valor];
+			} else if (campo == 'IVASC_pieza') {
+				return ivasc2Array = ['', 'Sí', 'No', 'NC'];
+				return ivasc2Array[valor];
+			} else if (campo == 'PINAG') {
+				return pinagArray = ['', 'Sí', 'No', 'NC'];
+				return pinagArray[valor];
+			} else if (campo == 'MQP') {
+				return mqpArray = ['', 'Sí, única pequeña', 'Sí, multiple grande', 'No', 'NC'];
+				return mqpArray[valor];
+			} else if (campo == 'TNM_pieza') {
+				return tnmArray = ['', 'pT2a', 'pT2b', 'pT2c', 'pT3a', 'pT3b', 'pT4'];
+				return tnmArray[valor];
+			}
+			return false;
+		}
+	</script>
+	<script>
+		var doc = new jsPDF();
+
+		doc.setFontSize(28);
+		doc.text(70, 20, 'Informe personal');
+
+		doc.setFontSize(20);
+		doc.text(20, 40, 'Inscripción');
+		doc.setFontSize(14);
+
+		doc.text(20, 50, 'Fecha de biopsia: {{paciente.Fecha_Biopsia |date:"Y-m-d"}}');
+		doc.text(20, 55, 'Fecha de nacimiento: {{paciente.Fecha_Nacimiento |date:"Y-m-d"}}');
+		doc.text(20, 60, 'Edad de inscripción: {{paciente.Edad}}');
+		doc.text(20, 65, 'Etnia: ' + num2string('Etnia')['{{paciente.Etnia}}']);
+		doc.text(20, 70, 'Obesidad: ' + num2string('Obesidad')['{{paciente.Obesidad}}']);
+		doc.text(20, 75, 'HTA: ' + num2string('HTA')['{{paciente.HTA}}']);
+		doc.text(20, 80, 'Diabetes Mellitus: ' + num2string('Diabetes')['{{paciente.Diabetes}}']);
+		doc.text(20, 85, 'Tabaco: ' + num2string('Tabaco')['{{paciente.Tabaco}}']);
+		doc.text(20, 90, 'Familiar CAP: ' + num2string('Familiar_CAP')['{{paciente.Familiar_CAP}}']);
+		doc.text(20, 95, 'TR preoperatorio: ' + num2string('TR_preop')['{{paciente.TR_preop}}']);
+		doc.text(20, 100, 'Estadiaje RM: ' + num2string('Estadiaje_RM')['{{paciente.Estadiaje_RM}}']);
+		doc.text(20, 105, 'Diametro max: {{paciente.Diam_max}}');
+		doc.text(20, 110, 'ISUP RM: ' + num2string('ISUP_RM')['{{paciente.ISUP_RM}}']);
+		doc.text(20, 115, 'Porcentaje positivo: {{paciente.Por_cores_pos}}');
+
+		doc.setFontSize(20);
+		doc.text(20, 135, 'Biopsia');
+		doc.setFontSize(14);
+
+		doc.text(20, 145, 'Nº biopsias: {{paciente.N_biopsias}}');
+		doc.text(20, 150, 'Tipo histologico: ' + num2string('Tipo_histologico')['{{paciente.Tipo_histologico}}']);
+		doc.text(20, 155, 'Gleason biopsia: ' + num2string('Gleason_biopsia')['{{paciente.Gleason_biopsia}}']);
+		doc.text(20, 160, 'Gleason primario: {{paciente.Gleason_pri}}');
+		doc.text(20, 165, 'Gleason secundario: {{paciente.Gleason_sec}}');
+		doc.text(20, 170, 'Nº cilindros positivos: {{paciente.Num_cil_pos}}');
+		doc.text(20, 175, 'Nº cilindros negativos: {{paciente.Num_cil_neg}}');
+		doc.text(20, 180, 'Porcentaje cilindros positivos: {{paciente.Por_cil_pos}}');
+		doc.text(20, 185, 'Max afección: {{paciente.Max_afeccion}}');
+		doc.text(20, 190, 'Bilateralidad: ' + num2string('Bilat')['{{paciente.Bilat}}']);
+		doc.text(20, 195, 'IPN: ' + num2string('IPN')['{{paciente.IPN}}']);
+		doc.text(20, 200, 'ILINF: ' + num2string('ILINF')['{{paciente.ILINF}}']);
+		doc.text(20, 205, 'IVASC: ' + num2string('IVASC')['{{paciente.IVASC}}']);
+		doc.text(20, 210, 'cTNM_biopsia: ' + num2string('cTNM_biopsia')['{{paciente.cTNM_biopsia}}']);
+		doc.text(20, 215, 'ISUP: {{paciente.ISUP}}');
+
+		doc.addPage();
+		doc.setFontSize(20);
+		doc.text(20, 40, 'Prostatectomía');
+		doc.setFontSize(14);
+
+		doc.text(20, 50, 'Fecha PRL: {{paciente.Fecha_PRL |date:"Y-m-d"}}');
+		doc.text(20, 55, 'Tratamiento: ' + num2string('Tratamiento')['{{paciente.Tratamiento}}']);
+		doc.text(20, 60, 'Gleason pieza PRL: ' + num2string('Gleason_pieza_PRL')['{{paciente.Gleason_pieza_PRL}}']);
+		doc.text(20, 65, 'Gleason primario pieza: {{paciente.Gleason_pri_2}}');
+		doc.text(20, 70, 'Gleason secundario pieza: {{paciente.Gleason_sec_2}}');
+		doc.text(20, 75, 'Bilateralidad pieza: ' + num2string('Bilat_2')['{{paciente.Bilat_2}}']);
+		doc.text(20, 80, 'Localización en pieza: ' + num2string('Localiz_en_pieza')['{{paciente.Localiz_en_pieza}}']);
+		doc.text(20, 85, 'Multifocalidad: ' + num2string('Multifocalidad')['{{paciente.Multifocalidad}}']);
+		doc.text(20, 90, 'Volumen tumoral: {{paciente.Volumen_tumoral}}');
+		doc.text(20, 95, 'Extensión extracapsular: ' + num2string('EEC')['{{paciente.EEC}}']);
+		doc.text(20, 100, 'IVS: ' + num2string('IVS')['{{paciente.IVS}}']);
+		doc.text(20, 105, 'IPN pieza: ' + num2string('IPN_pieza')['{{paciente.IPN_pieza}}']);
+		doc.text(20, 110, 'ILINF pieza: ' + num2string('ILINF_pieza')['{{paciente.ILINF_pieza}}']);
+		doc.text(20, 115, 'IVASC pieza: ' + num2string('IVASC_pieza')['{{paciente.IVASC_pieza}}']);
+		doc.text(20, 120, 'PINAG: ' + num2string('PINAG')['{{paciente.PINAG}}']);
+		doc.text(20, 125, 'Márgenes quirúrgicos positivos: ' + num2string('MQP')['{{paciente.MQP}}']);
+		doc.text(20, 130, 'TNM pieza: ' + num2string('TNM_pieza')['{{paciente.TNM_pieza}}']);
+		doc.text(20, 135, 'T. primera metástasis: {{paciente.T1_MTX}}');
+	</script>
+	{% if psaList %}
+		<script>
+			var cont = 0;
+		</script>
+		{% for psa in psaList %}
+			<script>
+				if(cont%12==0)
+				{
+					doc.addPage();
+					doc.setFontSize(14);
+					doc.text(10, 290, 'Fecha', 90);
+					doc.text(10, 270, 'PSA', 90);
+					doc.text(10, 255, 'Tiempo\rDupli.', 90);
+					doc.text(10, 235, 'Superv.\r10 años', 90);
+					doc.text(10, 215, 'Superv.\r15 años', 90);
+					doc.text(10, 195, 'Libre\r5 años', 90);
+					doc.text(10, 175, 'Libre\r10 años', 90);
+					doc.text(10, 150, 'T2', 90);
+					doc.text(10, 135, 'EEC', 90);
+					doc.text(10, 115, 'N+', 90);
+					doc.text(10, 100, 'IVS', 90);
+					doc.text(10, 80, 'Superv.\r15 años', 90);
+					doc.text(10, 60, 'Libre\r5 años', 90);
+					doc.text(10, 40, 'Libre\r7 años', 90);
+					doc.text(10, 20, 'Libre\r10 años', 90);
+					var margen = 25;
+				}
+				else
+				{
+					margen += 15;
+				}
+				doc.setFontSize(10);
+				doc.text(margen, 290, '{{psa.fecha|date:"d-m-y"}}' != 'None'?'{{psa.fecha|date:"d-m-y"}}':'' , 90);
+				doc.text(margen, 266, '{{psa.psa}}', 90);
+				doc.text(margen, 255, '{{psa.tdupli}} meses', 90);
+				doc.text(margen, 230, '{{psa.prob_surv_10yr}}' != 'None'?'{{psa.prob_surv_10yr}}%':'', 90);
+				doc.text(margen, 210, '{{psa.prob_surv_15yr}}' != 'None'?'{{psa.prob_surv_15yr}}%':'', 90);
+				doc.text(margen, 190, '{{psa.prog_free_5yr}}' != 'None'?'{{psa.prog_free_5yr}}%':'', 90);
+				doc.text(margen, 170, '{{psa.prog_free_10yr}}' != 'None'?'{{psa.prog_free_10yr}}%':'', 90);
+				doc.text(margen, 148, '{{psa.prob_organ_confined}}' != 'None'?'{{psa.prob_organ_confined}}%':'', 90);
+				doc.text(margen, 130, '{{psa.prob_EEC}}' != 'None'?'{{psa.prob_EEC}}%':'', 90);
+				doc.text(margen, 112, '{{psa.prob_lymph_inolved}}' != 'None'?'{{psa.prob_lymph_inolved}}%':'', 90);
+				doc.text(margen, 95, '{{psa.prob_seminal_invasion}}' != 'None'?'{{psa.prob_seminal_invasion}}%':'', 90);
+				doc.text(margen, 75, '{{psa.POST_prob_surv_15yr}}' != 'None'?'{{psa.POST_prob_surv_15yr}}%':'', 90);
+				doc.text(margen, 55, '{{psa.POST_prog_free_5yr}}' != 'None'?'{{psa.POST_prog_free_5yr}}%':'', 90);
+				doc.text(margen, 35, '{{psa.POST_prog_free_7yr}}' != 'None'?'{{psa.POST_prog_free_7yr}}%':'', 90);
+				doc.text(margen, 15, '{{psa.POST_prog_free_10yr}}' != 'None'?'{{psa.POST_prog_free_10yr}}%':'', 90);
+				cont++;
+			</script>
+		{% endfor %}
+	{% endif %}
+	<script>
+		function descargarInforme() {
+			doc.save('{{idPac}}.pdf');
+		}
+	</script>
+	<div id="pestanas">
+		<ul id=lista>
+			<li id="2"><a href='javascript:cambiarPestanna(2,6);'>Inscripción</a></li>
+			<li id="3"><a href='javascript:cambiarPestanna(3,6);'>Biopsia</a></li>
+			<li id="4"><a href='javascript:cambiarPestanna(4,6);'>Prostatectomía</a></li>
+			<li id="5"><a href='javascript:cambiarPestanna(5,6);'>Evolución</a></li>
+			<li id="6"><a href='javascript:cambiarPestanna(6,6);'>Completo</a></li>
+		</ul>
+		<div id="volver">
+			<button onclick="descargarInforme()">Descargar</button>
+			<button><a href="{% url 'inicio' %}">Volver</a></button>
+		</div>
+	</div>
+	<div id="contenidopestanas">
+		<div id="c2" class="cpestana">
+			<form method="POST" novalidate>
+				{% csrf_token %}
+				<div class="contenedor">
+					<div class="campos">
+						<p>Fecha Biopsia</p>
+						<input type="date" name="{{form.Fecha_Biopsia.name}}" value="{{paciente.Fecha_Biopsia |date:'Y-m-d'}}">
+						<p>Fecha Nacimiento</p>
+						<input type="date" name="{{form.Fecha_Nacimiento.name}}" value="{{paciente.Fecha_Nacimiento |date:'Y-m-d'}}">
+						<p>Edad (entre 0 y 120 años)</p>
+						<input type="number" name="{{form.Edad.name}}" min="0" max="120" value="{{paciente.Edad}}">
+						<p>Etnia</p>
+						<select name="{{form.Etnia.name}}">
+							<option value="0" {% if paciente.Etnia == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Etnia == 1 %} selected {% endif %}>Caucásico</option>
+							<option value="2" {% if paciente.Etnia == 2 %} selected {% endif %}>Negro</option>
+							<option value="3" {% if paciente.Etnia == 3 %} selected {% endif %}>Hispano</option>
+							<option value="4" {% if paciente.Etnia == 4 %} selected {% endif %}>Asiático</option>
+						</select>
+					</div>
+					<div class="campos">
+						<p>Obesidad</p>
+						<select name="{{form.Obesidad.name}}">
+							<option value="0" {% if paciente.Obesidad == -1 %} selected {% endif %}></option>
+							<option value="0" {% if paciente.Obesidad == 0 %} selected {% endif %}>NC</option>
+							<option value="1" {% if paciente.Obesidad == 1 %} selected {% endif %}>IMC &lt; 25</option>
+							<option value="2" {% if paciente.Obesidad == 2 %} selected {% endif %}>IMC 25-30</option>
+							<option value="3" {% if paciente.Obesidad == 3 %} selected {% endif %}>IMC &gt; 30</option>
+						</select>
+						<p>HTA</p>
+						<select name="{{form.HTA.name}}">
+							<option value="0" {% if paciente.HTA == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.HTA == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.HTA == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.HTA == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>Diabetes Mellitus</p>
+						<select name="{{form.Diabetes.name}}">
+							<option value="0" {% if paciente.Diabetes == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Diabetes == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Diabetes == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.Diabetes == 3 %} selected {% endif %}>NC</option>
+						</select>
+					</div>
+					<div class="campos">
+						<p>Tabaco</p>
+						<select name="{{form.Tabaco.name}}">
+							<option value="0" {% if paciente.Tabaco == -1 %} selected {% endif %}></option>
+							<option value="0" {% if paciente.Tabaco == 0 %} selected {% endif %}>NC</option>
+							<option value="1" {% if paciente.Tabaco == 1 %} selected {% endif %}>No</option>
+							<option value="2" {% if paciente.Tabaco == 2 %} selected {% endif %}>Exfumador</option>
+							<option value="3" {% if paciente.Tabaco == 3 %} selected {% endif %}>&lt; 10 cigarrillos/día
+							</option>
+							<option value="4" {% if paciente.Tabaco == 4 %} selected {% endif %}>10-20 cigarrillos/día
+							</option>
+							<option value="5" {% if paciente.Tabaco == 5 %} selected {% endif %}>&gt; 20 cigarrillos/día
+							</option>
+						</select>
+						<p>Familiar CAP</p>
+						<select name="{{form.Familiar_CAP.name}}">
+							<option value="0" {% if paciente.Familiar_CAP == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Familiar_CAP == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Familiar_CAP == 2 %} selected {% endif %}>No</option>
+						</select>
+						<p>TR preop</p>
+						<select name="{{form.TR_preop.name}}">
+							<option value="0" {% if paciente.TR_preop == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.TR_preop == 1 %} selected {% endif %}>Negativo</option>
+							<option value="2" {% if paciente.TR_preop == 2 %} selected {% endif %}>Sospechoso</option>
+							<option value="3" {% if paciente.TR_preop == 3 %} selected {% endif %}>Positivo</option>
+						</select>
+					</div>
+					<div class="campos">
+						<p>Estadiaje RM</p>
+						<select name="{{form.Estadiaje_RM.name}}">
+							<option value="0" {% if paciente.Estadiaje_RM == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Estadiaje_RM == 1 %} selected {% endif %}>T2</option>
+							<option value="2" {% if paciente.Estadiaje_RM == 2 %} selected {% endif %}>T3a</option>
+							<option value="3" {% if paciente.Estadiaje_RM == 3 %} selected {% endif %}>T3b</option>
+							<option value="4" {% if paciente.Estadiaje_RM == 4 %} selected {% endif %}>T4</option>
+							<option value="5" {% if paciente.Estadiaje_RM == 5 %} selected {% endif %}>NA</option>
+						</select>
+						<p>Diam. max. RM (0-45 mm)</p>
+						<input type="number" step="0.01" name="{{form.Diam_max.name}}" min="0" max="45"
+							value="{{paciente.Diam_max}}">
+						<p>ISUP RM</p>
+						<select name="{{form.ISUP_RM.name}}">
+							<option value="0" {% if paciente.ISUP_RM == -1 %} selected {% endif %}></option>
+							<option value="0" {% if paciente.ISUP_RM == 0 %} selected {% endif %}>0</option>
+							<option value="1" {% if paciente.ISUP_RM == 1 %} selected {% endif %}>1</option>
+							<option value="2" {% if paciente.ISUP_RM == 2 %} selected {% endif %}>2</option>
+							<option value="3" {% if paciente.ISUP_RM == 3 %} selected {% endif %}>3</option>
+							<option value="4" {% if paciente.ISUP_RM == 4 %} selected {% endif %}>4</option>
+							<option value="5" {% if paciente.ISUP_RM == 5 %} selected {% endif %}>5</option>
+						</select>
+						<p>% cores + RM</p>
+						<input type="number" step="0.01" name="{{form.Por_cores_pos.name}}" min="0" max="100" value="{{paciente.Por_cores_pos}}">
+					</div>
+					<div hidden>
+						<p>Nº biopsias previas</p>
+						<input type="number" name="{{form.N_biopsias.name}}" min="0" value="{{paciente.N_biopsias}}">
+						<p>Tipo_histologicológico</p>
+						<select name="{{form.Tipo_histologico.name}}">
+							<option value="0" {% if paciente.Tipo_histologico == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Tipo_histologico == 1 %} selected {% endif %}>Adenocarcinoma</option>
+							<option value="2" {% if paciente.Tipo_histologico == 2 %} selected {% endif %}>Otro</option>
+						</select>
+						<p>Gleason en biopsia</p>
+						<select name="{{form.Gleason_biopsia.name}}">
+							<option value="0" {% if paciente.Gleason_biopsia == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Gleason_biopsia == 1 %} selected {% endif %}>6</option>
+							<option value="2" {% if paciente.Gleason_biopsia == 2 %} selected {% endif %}>7 (3+4)</option>
+							<option value="3" {% if paciente.Gleason_biopsia == 3 %} selected {% endif %}>7 (4+3)</option>
+							<option value="4" {% if paciente.Gleason_biopsia == 4 %} selected {% endif %}>8-10</option>
+							<option value="5" {% if paciente.Gleason_biopsia == 5 %} selected {% endif %}>Inclasificable
+							</option>
+						</select>
+						<p>Gleason Primario</p>
+						<input type="number" name="{{form.Gleason_pri.name}}" min="1" max="5"
+							value="{{paciente.Gleason_pri}}">
+						<p>Gleason Secundario</p>
+						<input type="number" name="{{form.Gleason_sec.name}}" min="1" max="5"
+							value="{{paciente.Gleason_sec}}">
+						<p>Nº cil pos</p>
+						<input type="number" name="{{form.Num_cil_pos.name}}" min="0" max="20" value="{{paciente.Num_cil_pos}}">
+						<p>Nº cil neg</p>
+						<input type="number" name="{{form.Num_cil_neg.name}}" min="0" max="20" value="{{paciente.Num_cil_neg}}">
+						<p>% cil. +</p>
+						<input type="number" step="0.01" name="{{form.Por_cil_pos.name}}" min="0" max="100"
+							value="{{paciente.Por_cil_pos}}">
+						<p>% max. afectación cil.</p>
+						<input type="number" step="0.01" name="{{form.Max_afeccion.name}}" min="0" max="100"
+							value="{{paciente.Max_afeccion}}">
+						<p>Bilateralidad</p>
+						<select name="{{form.Bilat.name}}">
+							<option value="0" {% if paciente.Bilat == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Bilat == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Bilat == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.Bilat == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>IPN</p>
+						<select name="{{form.IPN.name}}">
+							<option value="0" {% if paciente.IPN == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IPN == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IPN == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IPN == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>ILINF</p>
+						<select name="{{form.ILINF.name}}">
+							<option value="0" {% if paciente.ILINF == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.ILINF == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.ILINF == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.ILINF == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>IVASC</p>
+						<select name="{{form.IVASC.name}}">
+							<option value="0" {% if paciente.IVASC == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IVASC == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IVASC == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IVASC == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>cTNM biopsia</p>
+						<select name="{{form.cTNM_biopsia.name}}">
+							<option value="0" {% if paciente.cTNM_biopsia == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.cTNM_biopsia == 1 %} selected {% endif %}>cT1</option>
+							<option value="2" {% if paciente.cTNM_biopsia == 2 %} selected {% endif %}>cT2a</option>
+							<option value="3" {% if paciente.cTNM_biopsia == 3 %} selected {% endif %}>cT2b</option>
+							<option value="4" {% if paciente.cTNM_biopsia == 4 %} selected {% endif %}>cT2c</option>
+							<option value="5" {% if paciente.cTNM_biopsia == 5 %} selected {% endif %}>cT3a</option>
+							<option value="6" {% if paciente.cTNM_biopsia == 6 %} selected {% endif %}>cT3b</option>
+							<option value="7" {% if paciente.cTNM_biopsia == 7 %} selected {% endif %}>cT4</option>
+						</select>
+						<p>ISUP</p>
+						<input type="number" name="{{form.ISUP.name}}" min="0" max="5" value="{{paciente.ISUP}}">
+
+						<p>Fecha PRL</p>
+						<input type="date" name="{{form.Fecha_PRL.name}}" value="{{paciente.Fecha_PRL |date:'Y-m-d'}}">
+						<p>Tratamiento</p>
+						<select name="{{form.Tratamiento.name}}">
+							<option value="0" {% if paciente.Tratamiento == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Tratamiento == 1 %} selected {% endif %}>Prostatectomía
+								radical
+							</option>
+							<option value="2" {% if paciente.Tratamiento == 2 %} selected {% endif %}>Radioterapia
+							</option>
+						</select>
+						<p>Gleason pieza PRL</p>
+						<select name="{{form.Gleason_pieza_PRL.name}}">
+							<option value="0" {% if paciente.Gleason_pieza_PRL == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Gleason_pieza_PRL == 1 %} selected {% endif %}>6</option>
+							<option value="2" {% if paciente.Gleason_pieza_PRL == 2 %} selected {% endif %}>7 (3+4)</option>
+							<option value="3" {% if paciente.Gleason_pieza_PRL == 3 %} selected {% endif %}>7 (4+3)</option>
+							<option value="4" {% if paciente.Gleason_pieza_PRL == 4 %} selected {% endif %}>8-10</option>
+							<option value="5" {% if paciente.Gleason_pieza_PRL == 5 %} selected {% endif %}> &lt;6</option>
+						</select>
+						<p>Gleason Primario</p>
+						<input type="number" name="{{form.Gleason_pri_2.name}}" min="1" max="5"
+							value="{{paciente.Gleason_pri_2}}">
+						<p>Gleason Secundario</p>
+						<input type="number" name="{{form.Gleason_sec_2.name}}" min="1" max="5"
+							value="{{paciente.Gleason_sec_2}}">
+						<p>Bilateralidad</p>
+						<select name="{{form.Bilat_2.name}}">
+							<option value="0" {% if paciente.Bilat_2 == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Bilat_2 == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Bilat_2 == 2 %} selected {% endif %}>No</option>
+						</select>
+						<p>Localización en pieza</p>
+						<select name="{{form.Localiz_en_pieza.name}}">
+							<option value="0" {% if paciente.Localiz_en_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Localiz_en_pieza == 1 %} selected {% endif %}>ZP</option>
+							<option value="2" {% if paciente.Localiz_en_pieza == 2 %} selected {% endif %}>ZT</option>
+							<option value="3" {% if paciente.Localiz_en_pieza == 3 %} selected {% endif %}>ZFMA</option>
+							<option value="4" {% if paciente.Localiz_en_pieza == 4 %} selected {% endif %}>Múltiple</option>
+						</select>
+						<p>Multifocalidad</p>
+						<select name="{{form.Multifocalidad.name}}">
+							<option value="0" {% if paciente.Multifocalidad == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Multifocalidad == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Multifocalidad == 2 %} selected {% endif %}>No</option>
+						</select>
+						<p>Volumen tumoral (% pieza)</p>
+						<input type="number" step="0.01" name="{{form.Volumen_tumoral.name}}" min="0" max="100"
+							value="{{paciente.Volumen_tumoral}}">
+						<p>ECC</p>
+						<select name="{{form.EEC.name}}">
+							<option value="0" {% if paciente.EEC == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.EEC == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.EEC == 2 %} selected {% endif %}>No</option>
+						</select>
+						<p>IVS</p>
+						<select name="{{form.IVS.name}}">
+							<option value="0" {% if paciente.IVS == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IVS == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IVS == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IVS == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>IPN pieza</p>
+						<select name="{{form.IPN_pieza.name}}">
+							<option value="0" {% if paciente.IPN_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IPN_pieza == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IPN_pieza == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IPN_pieza == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>ILINF pieza</p>
+						<select name="{{form.ILINF_pieza.name}}">
+							<option value="0" {% if paciente.ILINF_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.ILINF_pieza == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.ILINF_pieza == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.ILINF_pieza == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>IVASC pieza</p>
+						<select name="{{form.IVASC_pieza.name}}">
+							<option value="0" {% if paciente.IVASC_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IVASC_pieza == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IVASC_pieza == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IVASC_pieza == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>PINAG</p>
+						<select name="{{form.PINAG.name}}">
+							<option value="0" {% if paciente.PINAG == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.PINAG == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.PINAG == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.PINAG == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>MQP</p>
+						<select name="{{form.MQP.name}}">
+							<option value="0" {% if paciente.MQP == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.MQP == 1 %} selected {% endif %}>Sí, única pequeña
+							</option>
+							<option value="2" {% if paciente.MQP == 2 %} selected {% endif %}>Sí, multiple grande
+							</option>
+							<option value="3" {% if paciente.MQP == 3 %} selected {% endif %}>No</option>
+							<option value="4" {% if paciente.MQP == 4 %} selected {% endif %}>NC</option>
+						</select>
+						<p>TNM pieza</p>
+						<select name="{{form.TNM_pieza.name}}">
+							<option value="0" {% if paciente.TNM_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.TNM_pieza == 1 %} selected {% endif %}>pT2a</option>
+							<option value="2" {% if paciente.TNM_pieza == 2 %} selected {% endif %}>pT2b</option>
+							<option value="3" {% if paciente.TNM_pieza == 3 %} selected {% endif %}>pT2c</option>
+							<option value="4" {% if paciente.TNM_pieza == 4 %} selected {% endif %}>pT3a</option>
+							<option value="5" {% if paciente.TNM_pieza == 5 %} selected {% endif %}>pT3b</option>
+							<option value="6" {% if paciente.TNM_pieza == 6 %} selected {% endif %}>pT4</option>
+						</select>
+						<!-- <p>PSA POS(> 0.2 no se considera RBQ)</p>
+						<input type="number" step="0.01" name="{{form.PSA_pos.name}}" min="0" value="{{paciente.PSA_pos}}"> -->
+						<p>T1º MTX(meses)</p>
+						<input type="number" name="{{form.T1_MTX.name}}" min="0" value="{{paciente.T1_MTX}}">
+						<p>Fecha última revisión</p>
+						<input type="date" name="{{form.Ultima_revision.name}}" value="{{paciente.Ultima_revision |date:'Y-m-d'}}">
+						<!-- <p>TSEG(meses)</p>
+						<input type="number" name="{{form.TSEG.name}}" min="0" value="{{paciente.TSEG}}"> -->
+						<!-- <p>Último PSA</p>
+						<input type="number" step="0.01" name="{{form.Ultimo_PSA.name}}" min="0" value="{{paciente.Ultimo_PSA}}"> -->
+					</div>
+				</div>
+				<input type="number" name="pestania" value="2" hidden>
+				<div class="boton">
+					<input class="confirmar" type="submit" name="confirmar" value="Confirmar">
+				</div>
+			</form>
+		</div>
+		<div id="c3" class="cpestana">
+			<form method="POST" novalidate>
+				{% csrf_token %}
+				<div class="contenedor">
+					<div hidden>
+						<p>Fecha Biopsia</p>
+						<input type="date" name="{{form.Fecha_Biopsia.name}}" value="{{paciente.Fecha_Biopsia |date:'Y-m-d'}}">
+						<p>Fecha Nacimiento</p>
+						<input type="date" name="{{form.Fecha_Nacimiento.name}}" value="{{paciente.Fecha_Nacimiento |date:'Y-m-d'}}">
+						<p>Edad (entre 0 y 120 años)</p>
+						<input type="number" name="{{form.Edad.name}}" min="0" max="120" value="{{paciente.Edad}}">
+						<p>Etnia</p>
+						<select name="{{form.Etnia.name}}">
+							<option value="-1" {% if paciente.Etnia == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Etnia == 1 %} selected {% endif %}>Caucásico</option>
+							<option value="2" {% if paciente.Etnia == 2 %} selected {% endif %}>Negro</option>
+							<option value="3" {% if paciente.Etnia == 3 %} selected {% endif %}>Hispano</option>
+							<option value="4" {% if paciente.Etnia == 4 %} selected {% endif %}>Asiático</option>
+						</select>
+						<p>Obesidad</p>
+						<select name="{{form.Obesidad.name}}">
+							<option value="-1" {% if paciente.Obesidad == -1 %} selected {% endif %}></option>
+							<option value="0" {% if paciente.Obesidad == 0 %} selected {% endif %}>NC</option>
+							<option value="1" {% if paciente.Obesidad == 1 %} selected {% endif %}>IMC &lt; 25</option>
+							<option value="2" {% if paciente.Obesidad == 2 %} selected {% endif %}>IMC 25-30</option>
+							<option value="3" {% if paciente.Obesidad == 3 %} selected {% endif %}>IMC &gt; 30</option>
+						</select>
+						<p>HTA</p>
+						<select name="{{form.HTA.name}}">
+							<option value="-1" {% if paciente.HTA == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.HTA == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.HTA == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.HTA == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>Diabetes Mellitus</p>
+						<select name="{{form.Diabetes.name}}">
+							<option value="-1" {% if paciente.Diabetes == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Diabetes == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Diabetes == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.Diabetes == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>Tabaco</p>
+						<select name="{{form.Tabaco.name}}">
+							<option value="-1" {% if paciente.Tabaco == -1 %} selected {% endif %}></option>
+							<option value="0" {% if paciente.Tabaco == 0 %} selected {% endif %}>NC</option>
+							<option value="1" {% if paciente.Tabaco == 1 %} selected {% endif %}>No</option>
+							<option value="2" {% if paciente.Tabaco == 2 %} selected {% endif %}>Exfumador</option>
+							<option value="3" {% if paciente.Tabaco == 3 %} selected {% endif %}>&lt; 10 cigarrillos/día
+							</option>
+							<option value="4" {% if paciente.Tabaco == 4 %} selected {% endif %}>10-20 cigarrillos/día
+							</option>
+							<option value="5" {% if paciente.Tabaco == 5 %} selected {% endif %}>&gt; 20 cigarrillos/día
+							</option>
+						</select>
+						<p>Familiar CAP</p>
+						<select name="{{form.Familiar_CAP.name}}">
+							<option value="-1" {% if paciente.Familiar_CAP == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Familiar_CAP == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Familiar_CAP == 2 %} selected {% endif %}>No</option>
+						</select>
+						<p>TR preop</p>
+						<select name="{{form.TR_preop.name}}">
+							<option value="-1" {% if paciente.TR_preop == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.TR_preop == 1 %} selected {% endif %}>Negativo</option>
+							<option value="2" {% if paciente.TR_preop == 2 %} selected {% endif %}>Sospechoso</option>
+							<option value="3" {% if paciente.TR_preop == 3 %} selected {% endif %}>Positivo</option>
+						</select>
+						<!-- <p>PSA total (ng/ml)</p>
+						<input type="number" step="0.01" name="{{form.PSA_total.name}}" min="0"
+							value="{{paciente.PSA_total}}"> -->
+						<!--Calcular el PSA por estratos en un script-->
+						<!-- <p>PSAl/PSAt</p>
+						<input type="number" step="0.01" name="{{form.PSAl_PSAt.name}}" min="0" value="{{paciente.PSAl_PSAt}}"> -->
+						<p hidden>>TDDUPRE</p> <!-- (¿Lo tengo que calcular yo?) -->
+						<input hidden type="number" name="{{form.TDDUPRE.name}}" min="0" value="{{paciente.TDDUPRE}}">
+						<p>Estadiaje RM</p>
+						<select name="{{form.Estadiaje_RM.name}}">
+							<option value="-1" {% if paciente.Estadiaje_RM == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Estadiaje_RM == 1 %} selected {% endif %}>T2</option>
+							<option value="2" {% if paciente.Estadiaje_RM == 2 %} selected {% endif %}>T3a</option>
+							<option value="3" {% if paciente.Estadiaje_RM == 3 %} selected {% endif %}>T3b</option>
+							<option value="4" {% if paciente.Estadiaje_RM == 4 %} selected {% endif %}>T4</option>
+							<option value="5" {% if paciente.Estadiaje_RM == 5 %} selected {% endif %}>NA</option>
+						</select>
+						<p>Diam. max. RM (0-45 mm)</p>
+						<input type="number" step="0.01" name="{{form.Diam_max.name}}" min="0" max="45"
+							value="{{paciente.Diam_max}}">
+						<p>ISUP RM</p>
+						<select name="{{form.ISUP_RM.name}}">
+							<option value="-1" {% if paciente.ISUP_RM == -1 %} selected {% endif %}></option>
+							<option value="0" {% if paciente.ISUP_RM == 0 %} selected {% endif %}>0</option>
+							<option value="1" {% if paciente.ISUP_RM == 1 %} selected {% endif %}>1</option>
+							<option value="2" {% if paciente.ISUP_RM == 2 %} selected {% endif %}>2</option>
+							<option value="3" {% if paciente.ISUP_RM == 3 %} selected {% endif %}>3</option>
+							<option value="4" {% if paciente.ISUP_RM == 4 %} selected {% endif %}>4</option>
+							<option value="5" {% if paciente.ISUP_RM == 5 %} selected {% endif %}>5</option>
+						</select>
+						<p>% cores + RM</p>
+						<input type="number" step="0.01" name="{{form.Por_cores_pos.name}}" min="0" max="100"
+							value="{{paciente.Por_cores_pos}}">
+					</div>
+					<div class="campos">
+						<p>Nº biopsias previas</p>
+						<input type="number" name="{{form.N_biopsias.name}}" min="0" value="{{paciente.N_biopsias}}">
+						<p>Tipo_histologicológico</p>
+						<select name="{{form.Tipo_histologico.name}}">
+							<option value="-1" {% if paciente.Tipo_histologico == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Tipo_histologico == 1 %} selected {% endif %}>Adenocarcinoma</option>
+							<option value="2" {% if paciente.Tipo_histologico == 2 %} selected {% endif %}>Otro</option>
+						</select>
+						<p>Gleason en biopsia</p>
+						<select name="{{form.Gleason_biopsia.name}}">
+							<option value="-1" {% if paciente.Gleason_biopsia == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Gleason_biopsia == 1 %} selected {% endif %}>6</option>
+							<option value="2" {% if paciente.Gleason_biopsia == 2 %} selected {% endif %}>7 (3+4)</option>
+							<option value="3" {% if paciente.Gleason_biopsia == 3 %} selected {% endif %}>7 (4+3)</option>
+							<option value="4" {% if paciente.Gleason_biopsia == 4 %} selected {% endif %}>8-10</option>
+							<option value="5" {% if paciente.Gleason_biopsia == 5 %} selected {% endif %}>Inclasificable
+							</option>
+						</select>
+						<p>Gleason Primario</p>
+						<input type="number" name="{{form.Gleason_pri.name}}" min="1" max="5"
+							value="{{paciente.Gleason_pri}}">
+						<p>Gleason Secundario</p>
+						<input type="number" name="{{form.Gleason_sec.name}}" min="1" max="5"
+							value="{{paciente.Gleason_sec}}">
+					</div>
+					<div class="campos">
+						<p>Nº cil pos</p>
+						<input type="number" name="{{form.Num_cil_pos.name}}" min="0" max="20" value="{{paciente.Num_cil_pos}}">
+						<p>Nº cil neg</p>
+						<input type="number" name="{{form.Num_cil_neg.name}}" min="0" max="20" value="{{paciente.Num_cil_neg}}">
+						<p>% cil. +</p>
+						<input type="number" step="0.01" name="{{form.Por_cil_pos.name}}" min="0" max="100"
+							value="{{paciente.Por_cil_pos}}">
+						<p>% max. afectación cil.</p>
+						<input type="number" step="0.01" name="{{form.Max_afeccion.name}}" min="0" max="100"
+							value="{{paciente.Max_afeccion}}">
+						<p>Bilateralidad</p>
+						<select name="{{form.Bilat.name}}">
+							<option value="-1" {% if paciente.Bilat == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Bilat == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Bilat == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.Bilat == 3 %} selected {% endif %}>NC</option>
+						</select>
+					</div>
+					<div class="campos">
+						<p>IPN</p>
+						<select name="{{form.IPN.name}}">
+							<option value="-1" {% if paciente.IPN == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IPN == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IPN == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IPN == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>ILINF</p>
+						<select name="{{form.ILINF.name}}">
+							<option value="-1" {% if paciente.ILINF == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.ILINF == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.ILINF == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.ILINF == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>IVASC</p>
+						<select name="{{form.IVASC.name}}">
+							<option value="-1" {% if paciente.IVASC == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IVASC == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IVASC == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IVASC == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>cTNM biopsia</p>
+						<select name="{{form.cTNM_biopsia.name}}">
+							<option value="-1" {% if paciente.IVASC == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IVASC == 1 %} selected {% endif %}>cT1</option>
+							<option value="2" {% if paciente.IVASC == 2 %} selected {% endif %}>cT2a</option>
+							<option value="3" {% if paciente.IVASC == 3 %} selected {% endif %}>cT2b</option>
+							<option value="4" {% if paciente.IVASC == 4 %} selected {% endif %}>cT2c</option>
+							<option value="5" {% if paciente.IVASC == 5 %} selected {% endif %}>cT3a</option>
+							<option value="6" {% if paciente.IVASC == 6 %} selected {% endif %}>cT3b</option>
+							<option value="7" {% if paciente.IVASC == 7 %} selected {% endif %}>cT4</option>
+						</select>
+						<p>ISUP</p>
+						<input type="number" name="{{form.ISUP.name}}" min="0" max="5" value="{{paciente.ISUP}}">
+					</div>
+					<div hidden>
+						<p>Fecha PRL</p>
+						<input type="date" name="{{form.Fecha_PRL.name}}" value="{{paciente.Fecha_PRL |date:'Y-m-d'}}">
+						<p>Tratamiento</p>
+						<select name="{{form.Tratamiento.name}}">
+							<option value="-1" {% if paciente.Tratamiento == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Tratamiento == 1 %} selected {% endif %}>Prostatectomía
+								radical
+							</option>
+							<option value="2" {% if paciente.Tratamiento == 2 %} selected {% endif %}>Radioterapia
+							</option>
+						</select>
+						<p>Gleason pieza PRL</p>
+						<select name="{{form.Gleason_pieza_PRL.name}}">
+							<option value="-1" {% if paciente.Gleason_pieza_PRL == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Gleason_pieza_PRL == 1 %} selected {% endif %}>6</option>
+							<option value="2" {% if paciente.Gleason_pieza_PRL == 2 %} selected {% endif %}>7 (3+4)</option>
+							<option value="3" {% if paciente.Gleason_pieza_PRL == 3 %} selected {% endif %}>7 (4+3)</option>
+							<option value="4" {% if paciente.Gleason_pieza_PRL == 4 %} selected {% endif %}>8-10</option>
+							<option value="5" {% if paciente.Gleason_pieza_PRL == 5 %} selected {% endif %}> &lt;6</option>
+						</select>
+						<p>Gleason Primario</p>
+						<input type="number" name="{{form.Gleason_pri_2.name}}" min="1" max="5"
+							value="{{paciente.Gleason_pri_2}}">
+						<p>Gleason Secundario</p>
+						<input type="number" name="{{form.Gleason_sec_2.name}}" min="1" max="5"
+							value="{{paciente.Gleason_sec_2}}">
+						<p>Bilateralidad</p>
+						<select name="{{form.Bilat_2.name}}">
+							<option value="-1" {% if paciente.Bilat_2 == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Bilat_2 == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Bilat_2 == 2 %} selected {% endif %}>No</option>
+						</select>
+						<p>Localización en pieza</p>
+						<select name="{{form.Localiz_en_pieza.name}}">
+							<option value="-1" {% if paciente.Localiz_en_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Localiz_en_pieza == 1 %} selected {% endif %}>ZP</option>
+							<option value="2" {% if paciente.Localiz_en_pieza == 2 %} selected {% endif %}>ZT</option>
+							<option value="3" {% if paciente.Localiz_en_pieza == 3 %} selected {% endif %}>ZFMA</option>
+							<option value="4" {% if paciente.Localiz_en_pieza == 4 %} selected {% endif %}>Múltiple</option>
+						</select>
+						<p>Multifocalidad</p>
+						<select name="{{form.Multifocalidad.name}}">
+							<option value="-1" {% if paciente.Multifocalidad == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Multifocalidad == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Multifocalidad == 2 %} selected {% endif %}>No</option>
+						</select>
+						<p>Volumen tumoral (% pieza)</p>
+						<input type="number" step="0.01" name="{{form.Volumen_tumoral.name}}" min="0" max="100"
+							value="{{paciente.Volumen_tumoral}}">
+						<p>ECC</p>
+						<select name="{{form.EEC.name}}">
+							<option value="-1" {% if paciente.EEC == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.EEC == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.EEC == 2 %} selected {% endif %}>No</option>
+						</select>
+						<p>IVS</p>
+						<select name="{{form.IVS.name}}">
+							<option value="-1" {% if paciente.IVS == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IVS == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IVS == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IVS == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>IPN pieza</p>
+						<select name="{{form.IPN_pieza.name}}">
+							<option value="-1" {% if paciente.IPN_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IPN_pieza == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IPN_pieza == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IPN_pieza == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>ILINF pieza</p>
+						<select name="{{form.ILINF_pieza.name}}">
+							<option value="-1" {% if paciente.ILINF_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.ILINF_pieza == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.ILINF_pieza == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.ILINF_pieza == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>IVASC pieza</p>
+						<select name="{{form.IVASC_pieza.name}}">
+							<option value="-1" {% if paciente.IVASC_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IVASC_pieza == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IVASC_pieza == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IVASC_pieza == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>PINAG</p>
+						<select name="{{form.PINAG.name}}">
+							<option value="-1" {% if paciente.PINAG == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.PINAG == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.PINAG == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.PINAG == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>MQP</p>
+						<select name="{{form.MQP.name}}">
+							<option value="-1" {% if paciente.MQP == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.MQP == 1 %} selected {% endif %}>Sí, única pequeña
+							</option>
+							<option value="2" {% if paciente.MQP == 2 %} selected {% endif %}>Sí, multiple grande
+							</option>
+							<option value="3" {% if paciente.MQP == 3 %} selected {% endif %}>No</option>
+							<option value="4" {% if paciente.MQP == 4 %} selected {% endif %}>NC</option>
+						</select>
+						<p>TNM pieza</p>
+						<select name="{{form.TNM_pieza.name}}">
+							<option value="-1" {% if paciente.TNM_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.TNM_pieza == 1 %} selected {% endif %}>pT2a</option>
+							<option value="2" {% if paciente.TNM_pieza == 2 %} selected {% endif %}>pT2b</option>
+							<option value="3" {% if paciente.TNM_pieza == 3 %} selected {% endif %}>pT2c</option>
+							<option value="4" {% if paciente.TNM_pieza == 4 %} selected {% endif %}>pT3a</option>
+							<option value="5" {% if paciente.TNM_pieza == 5 %} selected {% endif %}>pT3b</option>
+							<option value="6" {% if paciente.TNM_pieza == 6 %} selected {% endif %}>pT4</option>
+						</select>
+
+
+						<!-- <p>PSA POS(>0.2 no se considera RBQ)</p>
+						<input type="number" step="0.01" name="{{form.PSA_pos.name}}" min="0" value="{{paciente.PSA_pos}}"> -->
+						<p>T1º MTX(meses)</p>
+						<input type="number" name="{{form.T1_MTX.name}}" min="0" value="{{paciente.T1_MTX}}">
+						<p>Fecha última revisión</p>
+						<input type="date" name="{{form.Ultima_revision.name}}" value="{{paciente.Ultima_revision |date:'Y-m-d'}}">
+						<!-- <p>TSEG(meses)</p>
+						<input type="number" name="{{form.TSEG.name}}" min="0" value="{{paciente.TSEG}}"> -->
+						<!-- <p>Último PSA</p>
+						<input type="number" step="0.01" name="{{form.Ultimo_PSA.name}}" min="0" value="{{paciente.Ultimo_PSA}}"> -->
+					
+					</div>
+				</div>
+				<input type="number" name="pestania" value="3" hidden>
+				<div class="boton">
+					<input class="confirmar" type="submit" name="confirmar" value="Confirmar">
+				</div>
+			</form>
+		</div>
+		<div id="c4" class="cpestana">
+			<form method="POST" novalidate>
+				{% csrf_token %}
+				<div class="contenedor">
+					<div hidden>
+						<p>Fecha Biopsia</p>
+						<input type="date" name="{{form.Fecha_Biopsia.name}}" value="{{paciente.Fecha_Biopsia |date:'Y-m-d'}}">
+						<p>Fecha Nacimiento</p>
+						<input type="date" name="{{form.Fecha_Nacimiento.name}}" value="{{paciente.Fecha_Nacimiento |date:'Y-m-d'}}">
+						<p>Edad (entre 0 y 120 años)</p>
+						<input type="number" name="{{form.Edad.name}}" min="0" max="120" value="{{paciente.Edad}}">
+						<p>Etnia</p>
+						<select name="{{form.Etnia.name}}">
+							<option value="0" {% if paciente.Etnia == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Etnia == 1 %} selected {% endif %}>Caucásico</option>
+							<option value="2" {% if paciente.Etnia == 2 %} selected {% endif %}>Negro</option>
+							<option value="3" {% if paciente.Etnia == 3 %} selected {% endif %}>Hispano</option>
+							<option value="4" {% if paciente.Etnia == 4 %} selected {% endif %}>Asiático</option>
+						</select>
+						<p>Obesidad</p>
+						<select name="{{form.Obesidad.name}}">
+							<option value="0" {% if paciente.Obesidad == -1 %} selected {% endif %}></option>
+							<option value="0" {% if paciente.Obesidad == 1 %} selected {% endif %}>NC</option>
+							<option value="1" {% if paciente.Obesidad == 2 %} selected {% endif %}>IMC &lt; 25</option>
+							<option value="2" {% if paciente.Obesidad == 3 %} selected {% endif %}>IMC 25-30</option>
+							<option value="3" {% if paciente.Obesidad == 4 %} selected {% endif %}>IMC &gt; 30</option>
+						</select>
+						<p>HTA</p>
+						<select name="{{form.HTA.name}}">
+							<option value="0" {% if paciente.HTA == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.HTA == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.HTA == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.HTA == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>Diabetes Mellitus</p>
+						<select name="{{form.Diabetes.name}}">
+							<option value="0" {% if paciente.Diabetes == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Diabetes == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Diabetes == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.Diabetes == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>Tabaco</p>
+						<select name="{{form.Tabaco.name}}">
+							<option value="0" {% if paciente.Tabaco == -1 %} selected {% endif %}></option>
+							<option value="0" {% if paciente.Tabaco == 0 %} selected {% endif %}>NC</option>
+							<option value="1" {% if paciente.Tabaco == 1 %} selected {% endif %}>No</option>
+							<option value="2" {% if paciente.Tabaco == 2 %} selected {% endif %}>Exfumador</option>
+							<option value="3" {% if paciente.Tabaco == 3 %} selected {% endif %}>&lt; 10 cigarrillos/día
+							</option>
+							<option value="4" {% if paciente.Tabaco == 4 %} selected {% endif %}>10-20 cigarrillos/día
+							</option>
+							<option value="5" {% if paciente.Tabaco == 5 %} selected {% endif %}>&gt; 20 cigarrillos/día
+							</option>
+						</select>
+						<p>Familiar CAP</p>
+						<select name="{{form.Familiar_CAP.name}}">
+							<option value="0" {% if paciente.Familiar_CAP == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Familiar_CAP == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Familiar_CAP == 2 %} selected {% endif %}>No</option>
+						</select>
+						<p>TR preop</p>
+						<select name="{{form.TR_preop.name}}">
+							<option value="0" {% if paciente.TR_preop == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.TR_preop == 1 %} selected {% endif %}>Negativo</option>
+							<option value="2" {% if paciente.TR_preop == 2 %} selected {% endif %}>Sospechoso</option>
+							<option value="3" {% if paciente.TR_preop == 3 %} selected {% endif %}>Positivo</option>
+						</select>
+						<!-- <p>PSA total (ng/ml)</p>
+						<input type="number" step="0.01" name="{{form.PSA_total.name}}" min="0"
+							value="{{paciente.PSA_total}}"> -->
+						<!--Calcular el PSA por estratos en un script -->
+						<!-- <p>PSAl/PSAt</p>
+						<input type="number" step="0.01" name="{{form.PSAl_PSAt.name}}" min="0" value="{{paciente.PSAl_PSAt}}"> -->
+						<p hidden>>TDDUPRE</p> <!-- (¿Lo tengo que calcular yo?) -->
+						<input hidden type="number" name="{{form.TDDUPRE.name}}" min="0" value="{{paciente.TDDUPRE}}">
+						<p>Estadiaje RM</p>
+						<select name="{{form.Estadiaje_RM.name}}">
+							<option value="0" {% if paciente.Estadiaje_RM == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Estadiaje_RM == 1 %} selected {% endif %}>T2</option>
+							<option value="2" {% if paciente.Estadiaje_RM == 2 %} selected {% endif %}>T3a</option>
+							<option value="3" {% if paciente.Estadiaje_RM == 3 %} selected {% endif %}>T3b</option>
+							<option value="4" {% if paciente.Estadiaje_RM == 4 %} selected {% endif %}>T4</option>
+							<option value="5" {% if paciente.Estadiaje_RM == 5 %} selected {% endif %}>NA</option>
+						</select>
+						<p>Diam. max. RM (0-45 mm)</p>
+						<input type="number" step="0.01" name="{{form.Diam_max.name}}" min="0" max="45"
+							value="{{paciente.Diam_max}}">
+						<p>ISUP RM</p>
+						<select name="{{form.ISUP_RM.name}}">
+							<option value="0" {% if paciente.ISUP_RM == -1 %} selected {% endif %}></option>
+							<option value="0" {% if paciente.ISUP_RM == 0 %} selected {% endif %}>0</option>
+							<option value="1" {% if paciente.ISUP_RM == 1 %} selected {% endif %}>1</option>
+							<option value="2" {% if paciente.ISUP_RM == 2 %} selected {% endif %}>2</option>
+							<option value="3" {% if paciente.ISUP_RM == 3 %} selected {% endif %}>3</option>
+							<option value="4" {% if paciente.ISUP_RM == 4 %} selected {% endif %}>4</option>
+							<option value="5" {% if paciente.ISUP_RM == 5 %} selected {% endif %}>5</option>
+						</select>
+						<p>% cores + RM</p>
+						<input type="number" step="0.01" name="{{form.Por_cores_pos.name}}" min="0" max="100"
+							value="{{paciente.Por_cores_pos}}">
+						<p>Nº biopsias previas</p>
+						<input type="number" name="{{form.N_biopsias.name}}" min="0" value="{{paciente.N_biopsias}}">
+						<p>Tipo_histologicológico</p>
+						<select name="{{form.Tipo_histologico.name}}">
+							<option value="0" {% if paciente.Tipo_histologico == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Tipo_histologico == 1 %} selected {% endif %}>Adenocarcinoma</option>
+							<option value="2" {% if paciente.Tipo_histologico == 2 %} selected {% endif %}>Otro</option>
+						</select>
+						<p>Gleason en biopsia</p>
+						<select name="{{form.Gleason_biopsia.name}}">
+							<option value="0" {% if paciente.Gleason_biopsia == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Gleason_biopsia == 1 %} selected {% endif %}>6</option>
+							<option value="2" {% if paciente.Gleason_biopsia == 2 %} selected {% endif %}>7 (3+4)</option>
+							<option value="3" {% if paciente.Gleason_biopsia == 3 %} selected {% endif %}>7 (4+3)</option>
+							<option value="4" {% if paciente.Gleason_biopsia == 4 %} selected {% endif %}>8-10</option>
+							<option value="5" {% if paciente.Gleason_biopsia == 5 %} selected {% endif %}>Inclasificable
+							</option>
+						</select>
+						<p>Gleason Primario</p>
+						<input type="number" name="{{form.Gleason_pri.name}}" min="1" max="5"
+							value="{{paciente.Gleason_pri}}">
+						<p>Gleason Secundario</p>
+						<input type="number" name="{{form.Gleason_sec.name}}" min="1" max="5"
+							value="{{paciente.Gleason_sec}}">
+						<p>Nº cil pos</p>
+						<input type="number" name="{{form.Num_cil_pos.name}}" min="0" max="20" value="{{paciente.Num_cil_pos}}">
+						<p>Nº cil neg</p>
+						<input type="number" name="{{form.Num_cil_neg.name}}" min="0" max="20" value="{{paciente.Num_cil_neg}}">
+						<p>% cil. +</p>
+						<input type="number" step="0.01" name="{{form.Por_cil_pos.name}}" min="0" max="100"
+							value="{{paciente.Por_cil_pos}}">
+						<p>% max. afectación cil.</p>
+						<input type="number" step="0.01" name="{{form.Max_afeccion.name}}" min="0" max="100"
+							value="{{paciente.Max_afeccion}}">
+						<p>Bilateralidad</p>
+						<select name="{{form.Bilat.name}}">
+							<option value="0" {% if paciente.Bilat == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Bilat == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Bilat == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.Bilat == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>IPN</p>
+						<select name="{{form.IPN.name}}">
+							<option value="0" {% if paciente.IPN == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IPN == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IPN == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IPN == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>ILINF</p>
+						<select name="{{form.ILINF.name}}">
+							<option value="0" {% if paciente.ILINF == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.ILINF == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.ILINF == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.ILINF == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>IVASC</p>
+						<select name="{{form.IVASC.name}}">
+							<option value="0" {% if paciente.IVASC == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IVASC == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IVASC == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IVASC == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>cTNM biopsia</p>
+						<select name="{{form.cTNM_biopsia.name}}">
+							<option value="0" {% if paciente.cTNM_biopsia == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.cTNM_biopsia == 1 %} selected {% endif %}>cT1</option>
+							<option value="2" {% if paciente.cTNM_biopsia == 2 %} selected {% endif %}>cT2a</option>
+							<option value="3" {% if paciente.cTNM_biopsia == 3 %} selected {% endif %}>cT2b</option>
+							<option value="4" {% if paciente.cTNM_biopsia == 4 %} selected {% endif %}>cT2c</option>
+							<option value="5" {% if paciente.cTNM_biopsia == 5 %} selected {% endif %}>cT3a</option>
+							<option value="6" {% if paciente.cTNM_biopsia == 6 %} selected {% endif %}>cT3b</option>
+							<option value="7" {% if paciente.cTNM_biopsia == 7 %} selected {% endif %}>cT4</option>
+						</select>
+						<p>ISUP</p>
+						<input type="number" name="{{form.ISUP.name}}" min="0" max="5" value="{{paciente.ISUP}}">
+					</div>
+					<div class="campos">
+						<p>Fecha PRL</p>
+						<input type="date" name="{{form.Fecha_PRL.name}}" value="{{paciente.Fecha_PRL |date:'Y-m-d'}}">
+						<p>Tratamiento</p>
+						<select name="{{form.Tratamiento.name}}">
+							<option value="0" {% if paciente.Tratamiento == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Tratamiento == 1 %} selected {% endif %}>Prostatectomía
+								radical
+							</option>
+							<option value="2" {% if paciente.Tratamiento == 2 %} selected {% endif %}>Radioterapia
+							</option>
+						</select>
+						<p>Gleason pieza PRL</p>
+						<select name="{{form.Gleason_pieza_PRL.name}}">
+							<option value="0" {% if paciente.Gleason_pieza_PRL == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Gleason_pieza_PRL == 1 %} selected {% endif %}>6</option>
+							<option value="2" {% if paciente.Gleason_pieza_PRL == 2 %} selected {% endif %}>7 (3+4)</option>
+							<option value="3" {% if paciente.Gleason_pieza_PRL == 3 %} selected {% endif %}>7 (4+3)</option>
+							<option value="4" {% if paciente.Gleason_pieza_PRL == 4 %} selected {% endif %}>8-10</option>
+							<option value="5" {% if paciente.Gleason_pieza_PRL == 5 %} selected {% endif %}> &lt;6</option>
+						</select>
+						<p>Gleason Primario</p>
+						<input type="number" name="{{form.Gleason_pri_2.name}}" min="1" max="5"
+							value="{{paciente.Gleason_pri_2}}">
+						<p>Gleason Secundario</p>
+						<input type="number" name="{{form.Gleason_sec_2.name}}" min="1" max="5"
+							value="{{paciente.Gleason_sec_2}}">
+					</div>
+					<div class="campos">
+						<p>Bilateralidad</p>
+						<select name="{{form.Bilat_2.name}}">
+							<option value="0" {% if paciente.Bilat_2 == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Bilat_2 == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Bilat_2 == 2 %} selected {% endif %}>No</option>
+						</select>
+						<p>Localización en pieza</p>
+						<select name="{{form.Localiz_en_pieza.name}}">
+							<option value="0" {% if paciente.Localiz_en_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Localiz_en_pieza == 1 %} selected {% endif %}>ZP</option>
+							<option value="2" {% if paciente.Localiz_en_pieza == 2 %} selected {% endif %}>ZT</option>
+							<option value="3" {% if paciente.Localiz_en_pieza == 3 %} selected {% endif %}>ZFMA</option>
+							<option value="4" {% if paciente.Localiz_en_pieza == 4 %} selected {% endif %}>Múltiple</option>
+						</select>
+						<p>Multifocalidad</p>
+						<select name="{{form.Multifocalidad.name}}">
+							<option value="0" {% if paciente.Multifocalidad == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Multifocalidad == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Multifocalidad == 2 %} selected {% endif %}>No</option>
+						</select>
+						<p>Volumen tumoral (% pieza)</p>
+						<input type="number" step="0.01" name="{{form.Volumen_tumoral.name}}" min="0" max="100"
+							value="{{paciente.Volumen_tumoral}}">
+					</div>
+					<div class="campos">
+						<p>ECC</p>
+						<select name="{{form.EEC.name}}">
+							<option value="0" {% if paciente.EEC == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.EEC == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.EEC == 2 %} selected {% endif %}>No</option>
+						</select>
+						<p>IVS</p>
+						<select name="{{form.IVS.name}}">
+							<option value="0" {% if paciente.IVS == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IVS == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IVS == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IVS == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>IPN pieza</p>
+						<select name="{{form.IPN_pieza.name}}">
+							<option value="0" {% if paciente.IPN_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IPN_pieza == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IPN_pieza == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IPN_pieza == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>ILINF pieza</p>
+						<select name="{{form.ILINF_pieza.name}}">
+							<option value="0" {% if paciente.ILINF_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.ILINF_pieza == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.ILINF_pieza == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.ILINF_pieza == 3 %} selected {% endif %}>NC</option>
+						</select>
+					</div>
+					<div class="campos">
+						<p>IVASC pieza</p>
+						<select name="{{form.IVASC_pieza.name}}">
+							<option value="0" {% if paciente.IVASC_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IVASC_pieza == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IVASC_pieza == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IVASC_pieza == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>PINAG</p>
+						<select name="{{form.PINAG.name}}">
+							<option value="0" {% if paciente.PINAG == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.PINAG == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.PINAG == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.PINAG == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>MQP</p>
+						<select name="{{form.MQP.name}}">
+							<option value="0" {% if paciente.MQP == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.MQP == 1 %} selected {% endif %}>Sí, única pequeña
+							</option>
+							<option value="2" {% if paciente.MQP == 2 %} selected {% endif %}>Sí, multiple grande
+							</option>
+							<option value="3" {% if paciente.MQP == 3 %} selected {% endif %}>No</option>
+							<option value="4" {% if paciente.MQP == 4 %} selected {% endif %}>NC</option>
+						</select>
+						<p>TNM pieza</p>
+						<select name="{{form.TNM_pieza.name}}">
+							<option value="0" {% if paciente.TNM_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.TNM_pieza == 1 %} selected {% endif %}>pT2a</option>
+							<option value="2" {% if paciente.TNM_pieza == 2 %} selected {% endif %}>pT2b</option>
+							<option value="3" {% if paciente.TNM_pieza == 3 %} selected {% endif %}>pT2c</option>
+							<option value="4" {% if paciente.TNM_pieza == 4 %} selected {% endif %}>pT3a</option>
+							<option value="5" {% if paciente.TNM_pieza == 5 %} selected {% endif %}>pT3b</option>
+							<option value="6" {% if paciente.TNM_pieza == 6 %} selected {% endif %}>pT4</option>
+						</select>
+						<p>T1º MTX(meses)</p>
+						<input type="number" name="{{form.T1_MTX.name}}" min="0" value="{{paciente.T1_MTX}}">
+					</div>
+				</div>
+				<input type="number" name="pestania" value="4" hidden>
+				<div class="boton">
+					<input class="confirmar" type="submit" name="confirmar" value="Confirmar">
+				</div>
+			</form>
+		</div>
+		<div id="c5" class="cpestana">
+			<form method="POST">
+				{% csrf_token %}
+				<div class="contenedor">
+					<div class="campos">
+						<p hidden>ID Paciente</p>
+						<input hidden type="number" name="{{formPSA.idPac.name}}" value="{{idPac}}">
+						<p>Fecha</p>
+						<input type="date" name="{{formPSA.fecha.name}}">
+					</div>
+					<div class="campos">
+						<p>PSA</p>
+						<input type="number" step="0.0001" name="{{formPSA.psa.name}}" min="0">	
+					</div>
+					<input hidden type="number" name="{{formPSA.tdupli.name}}" min="0">
+					<input hidden type="number" name="{{formPSA.TSEG.name}}" min="0">
+				</div>
+				<input type="number" name="pestania" value="5" hidden>
+				<div class="boton">
+					<input class="confirmar" type="submit" name="confirmarPSA" value="Confirmar">
+					<input class="confirmar" type="submit" name="eliminarPSA" value="Eliminar">
+				</div>
+			</form>
+			<script>
+				var message = 'La calculadora no ha sido ejecutada debido a: \n\n';
+			</script>
+			{% if messages %}
+				{% for message in messages %}
+					<script>
+						message += '{{ message }} \n';
+					</script>
+				{% endfor %}
+				<script>
+					window.alert(message);
+				</script>
+			{% endif %}
+			{% if psaList %}
+				<table>
+					<tr id="principalTr">
+						<th colspan="4">General</th>
+						<th colspan="8">Pre-radical</th>
+						<th colspan="4">Post-radical</th>
+					</tr>
+					<tr id="columnasTr">
+						<th>Fecha</th>
+						<th>PSA</th>
+						<th>Tiempo seguimiento</th>
+						<th>Tiempo duplicación</th>
+						
+						<th>Superv. PRL 10 años</th>
+						<th>Superv. PRL 15 años</th>	
+						<th>PSA estable 5 años</th>
+						<th>PSA estable 10 años</th>
+						<th>T2</th>
+						<th>EEC</th>
+						<th>N+</th>
+						<th>IVS</th>
+						
+						<th>Superv. 15 años</th>	
+						<th>PSA estable 5 años</th>
+						<th>PSA estable 7 años</th>
+						<th>PSA estable 10 años</th>
+					</tr>
+					<script>var fila=0;</script>
+					{% for psa in psaList %}
+						<script>
+						if(fila%2==0){
+							document.write('<tr class="par">');
+						}else document.write('<tr class="impar">');
+						fila++;
+						</script>
+						<td>{{psa.fecha|date:'d-m-y'}}</td>
+						<td {% if psa.psa > 0.5 %}class="black"{% elif psa.psa > 0.2 %}class="red"{% endif %}>{{psa.psa}}</td>
+						<td>{{psa.TSEG}} meses</td>
+						<td {% if psa.tdupli < 6 and psa.tdupli > 0 %}class="red"{% endif %}>{{psa.tdupli}} meses</td>
+
+						<td>{% if psa.prob_surv_10yr %}{{psa.prob_surv_10yr}} %{% endif %}</td>
+						<td>{% if psa.prob_surv_15yr %}{{psa.prob_surv_15yr}} %{% endif %}</td>
+						<td>{% if psa.prog_free_5yr %}{{psa.prog_free_5yr}} %{% endif %}</td>
+						<td>{% if psa.prog_free_10yr %}{{psa.prog_free_10yr}} %{% endif %}</td>
+						<td>{% if psa.prob_organ_confined %}{{psa.prob_organ_confined}} %{% endif %}</td>
+						<td>{% if psa.prob_EEC %}{{psa.prob_EEC}} %{% endif %}</td>
+						<td>{% if psa.prob_lymph_inolved %}{{psa.prob_lymph_inolved}} %{% endif %}</td>
+						<td>{% if psa.prob_seminal_invasion %}{{psa.prob_seminal_invasion}} %{% endif %}</td>
+
+						<td>{% if psa.POST_prob_surv_15yr %}{{psa.POST_prob_surv_15yr}} %{% endif %}</td>
+						<td>{% if psa.POST_prog_free_5yr %}{{psa.POST_prog_free_5yr}} %{% endif %}</td>
+						<td>{% if psa.POST_prog_free_7yr %}{{psa.POST_prog_free_7yr}} %{% endif %}</td>
+						<td>{% if psa.POST_prog_free_10yr %}{{psa.POST_prog_free_10yr}} %{% endif %}</td>
+					</tr>
+					{% endfor %}
+				</table>
+				<div style="width: 100%; height: 20em; margin-top: 3em;">
+					<canvas id="myChart" style="margin-bottom: 30px; width: 90%; height: 100%;"></canvas>
+				</div>
+			{% endif %}
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+			
+			<script>
+				const ctx = document.getElementById('myChart').getContext('2d');
+		
+				var psas = JSON.parse('{{ psas.psas }}');
+				var tduplis = JSON.parse('{{ psas.tduplis }}');
+				const fechas = '{{ psas.fechas }}'.replace(new RegExp("&"+"#"+"x27;", "g"), "").split("[")[1].split("]")[0].split(",");
+
+				const DATA_COUNT = fechas.length;
+				const labels = [];
+
+				for (let i = 0; i < DATA_COUNT; ++i) {
+					if(i==0) {
+						var d = new Date(fechas[i]);
+						d.setDate(d.getDate() - 1);
+						labels.push(d);
+					}
+					labels.push(new Date(fechas[i]));
+					if(i==DATA_COUNT-1){
+						var d = new Date(fechas[i]);
+						d.setDate(d.getDate() + 1);
+						labels.push(d);
+					}
+				}
+
+				const data = {
+					labels: labels,
+					datasets: [
+						{
+						label: 'PSA',
+						data: psas,
+						borderColor: 'rgba(255,0,0,0.5)',
+                		backgroundColor: 'rgba(255, 0, 0, 1)',
+						yAxisID: 'y',
+						xAxisID: 'x'
+						},
+						{
+						label: 'Tiempo de duplicación',
+						data: tduplis,
+						borderColor: 'rgba(0,0,255,0.5)',
+                		backgroundColor: 'rgba(0, 0, 255, 1)',
+						yAxisID: 'y1',
+						xAxisID: 'x'
+						}
+					]
+				};
+				const config = {
+					type: 'bar',
+					data: data,
+					options: {
+						responsive: true,
+						interaction: {
+							mode: 'index',
+							intersect: false,
+						},
+						stacked: false,
+						plugins: {
+							title: {
+								display: true,
+								text: 'Chart.js Line Chart - Multi Axis'
+							}
+						},
+						scales: {
+							xAxes: [{
+								id: 'x',
+								type: "time",
+								time:{
+									tooltipFormat: 'DD/MM/YYYY',
+									unit: 'day',
+								},
+							}],
+							
+							yAxes: [
+								{
+									type: 'linear',
+									display: true,
+									position: 'left',
+									id: "y",
+									ticks: {
+										beginAtZero: true
+									}
+
+								},
+								{
+									type: 'linear',
+									display: true,
+									position: 'right',
+									id: "y1",
+									grid: {
+										drawOnChartArea: false, // only want the grid lines for one axis to show up
+									},
+									ticks: {
+										beginAtZero: true
+									}
+								},
+							]
+						},
+					}
+				};
+
+				const chart = new Chart(ctx, config);
+			</script>
+		</div>
+		<div id="c6" class="cpestana">
+			<form method="POST" novalidate>
+				{% csrf_token %}
+				<div class="contenedor">
+					<div class="campos">
+						<p>Fecha Biopsia</p>
+						<input type="date" name="{{form.Fecha_Biopsia.name}}" value="{{paciente.Fecha_Biopsia |date:'Y-m-d'}}">
+						<p>Fecha Nacimiento</p>
+						<input type="date" name="{{form.Fecha_Nacimiento.name}}" value="{{paciente.Fecha_Nacimiento |date:'Y-m-d'}}">
+						<p>Edad (entre 0 y 120 años)</p>
+						<input type="number" name="{{form.Edad.name}}" min="0" max="120" value="{{paciente.Edad}}">
+						<p>Etnia</p>
+						<select name="{{form.Etnia.name}}">
+							<option value="0" {% if paciente.Etnia == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Etnia == 1 %} selected {% endif %}>Caucásico</option>
+							<option value="2" {% if paciente.Etnia == 2 %} selected {% endif %}>Negro</option>
+							<option value="3" {% if paciente.Etnia == 3 %} selected {% endif %}>Hispano</option>
+							<option value="4" {% if paciente.Etnia == 4 %} selected {% endif %}>Asiático</option>
+						</select>
+						<p>Obesidad</p>
+						<select name="{{form.Obesidad.name}}">
+							<option value="0" {% if paciente.Obesidad == -1 %} selected {% endif %}></option>
+							<option value="0" {% if paciente.Obesidad == 1 %} selected {% endif %}>NC</option>
+							<option value="1" {% if paciente.Obesidad == 2 %} selected {% endif %}>IMC &lt; 25</option>
+							<option value="2" {% if paciente.Obesidad == 3 %} selected {% endif %}>IMC 25-30</option>
+							<option value="3" {% if paciente.Obesidad == 4 %} selected {% endif %}>IMC &gt; 30</option>
+						</select>
+						<p>HTA</p>
+						<select name="{{form.HTA.name}}">
+							<option value="0" {% if paciente.HTA == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.HTA == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.HTA == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.HTA == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>Diabetes Mellitus</p>
+						<select name="{{form.Diabetes.name}}">
+							<option value="0" {% if paciente.Diabetes == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Diabetes == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Diabetes == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.Diabetes == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>Tabaco</p>
+						<select name="{{form.Tabaco.name}}">
+							<option value="0" {% if paciente.Tabaco == -1 %} selected {% endif %}></option>
+							<option value="0" {% if paciente.Tabaco == 0 %} selected {% endif %}>NC</option>
+							<option value="1" {% if paciente.Tabaco == 1 %} selected {% endif %}>No</option>
+							<option value="2" {% if paciente.Tabaco == 2 %} selected {% endif %}>Exfumador</option>
+							<option value="3" {% if paciente.Tabaco == 3 %} selected {% endif %}>&lt; 10 cigarrillos/día
+							</option>
+							<option value="4" {% if paciente.Tabaco == 4 %} selected {% endif %}>10-20 cigarrillos/día
+							</option>
+							<option value="5" {% if paciente.Tabaco == 5 %} selected {% endif %}>&gt; 20 cigarrillos/día
+							</option>
+						</select>
+						<p>Familiar CAP</p>
+						<select name="{{form.Familiar_CAP.name}}">
+							<option value="0" {% if paciente.Familiar_CAP == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Familiar_CAP == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Familiar_CAP == 2 %} selected {% endif %}>No</option>
+						</select>
+						<p>TR preop</p>
+						<select name="{{form.TR_preop.name}}">
+							<option value="0" {% if paciente.TR_preop == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.TR_preop == 1 %} selected {% endif %}>Negativo</option>
+							<option value="2" {% if paciente.TR_preop == 2 %} selected {% endif %}>Sospechoso</option>
+							<option value="3" {% if paciente.TR_preop == 3 %} selected {% endif %}>Positivo</option>
+						</select>
+						<!-- <p>PSA total (ng/ml)</p>
+						<input type="number" step="0.01" name="{{form.PSA_total.name}}" min="0"
+							value="{{paciente.PSA_total}}"> -->
+						<!--Calcular el PSA por estratos en un script -->
+						<!-- <p>PSAl/PSAt</p>
+						<input type="number" step="0.01" name="{{form.PSAl_PSAt.name}}" min="0" value="{{paciente.PSAl_PSAt}}"> -->
+					</div>
+					<div class="campos">
+						<p hidden>TDDUPRE</p> <!-- (¿Lo tengo que calcular yo?) -->
+						<input hidden type="number" name="{{form.TDDUPRE.name}}" min="0" value="{{paciente.TDDUPRE}}">
+						<p>Estadiaje RM</p>
+						<select name="{{form.Estadiaje_RM.name}}">
+							<option value="0" {% if paciente.Estadiaje_RM == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Estadiaje_RM == 1 %} selected {% endif %}>T2</option>
+							<option value="2" {% if paciente.Estadiaje_RM == 2 %} selected {% endif %}>T3a</option>
+							<option value="3" {% if paciente.Estadiaje_RM == 3 %} selected {% endif %}>T3b</option>
+							<option value="4" {% if paciente.Estadiaje_RM == 4 %} selected {% endif %}>T4</option>
+							<option value="5" {% if paciente.Estadiaje_RM == 5 %} selected {% endif %}>NA</option>
+						</select>
+						<p>Diam. max. RM (0-45 mm)</p>
+						<input type="number" step="0.01" name="{{form.Diam_max.name}}" min="0" max="45"
+							value="{{paciente.Diam_max}}">
+						<p>ISUP RM</p>
+						<select name="{{form.ISUP_RM.name}}">
+							<option value="0" {% if paciente.ISUP_RM == -1 %} selected {% endif %}></option>
+							<option value="0" {% if paciente.ISUP_RM == 0 %} selected {% endif %}>0</option>
+							<option value="1" {% if paciente.ISUP_RM == 1 %} selected {% endif %}>1</option>
+							<option value="2" {% if paciente.ISUP_RM == 2 %} selected {% endif %}>2</option>
+							<option value="3" {% if paciente.ISUP_RM == 3 %} selected {% endif %}>3</option>
+							<option value="4" {% if paciente.ISUP_RM == 4 %} selected {% endif %}>4</option>
+							<option value="5" {% if paciente.ISUP_RM == 5 %} selected {% endif %}>5</option>
+						</select>
+						<p>% cores + RM</p>
+						<input type="text" inputmode="decimal"   name="{{form.Por_cores_pos.name}}" min="0" max="100"
+							value="{{paciente.Por_cores_pos}}">
+
+
+						<p>Nº biopsias previas</p>
+						<input type="number" name="{{form.N_biopsias.name}}" min="0" value="{{paciente.N_biopsias}}">
+						<p>Tipo_histologicológico</p>
+						<select name="{{form.Tipo_histologico.name}}">
+							<option value="0" {% if paciente.Tipo_histologico == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Tipo_histologico == 1 %} selected {% endif %}>Adenocarcinoma</option>
+							<option value="2" {% if paciente.Tipo_histologico == 2 %} selected {% endif %}>Otro</option>
+						</select>
+						<p>Gleason en biopsia</p>
+						<select name="{{form.Gleason_biopsia.name}}">
+							<option value="0" {% if paciente.Gleason_biopsia == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Gleason_biopsia == 1 %} selected {% endif %}>6</option>
+							<option value="2" {% if paciente.Gleason_biopsia == 2 %} selected {% endif %}>7 (3+4)</option>
+							<option value="3" {% if paciente.Gleason_biopsia == 3 %} selected {% endif %}>7 (4+3)</option>
+							<option value="4" {% if paciente.Gleason_biopsia == 4 %} selected {% endif %}>8-10</option>
+							<option value="5" {% if paciente.Gleason_biopsia == 5 %} selected {% endif %}>Inclasificable
+							</option>
+						</select>
+						<p>Gleason Primario</p>
+						<input type="number" name="{{form.Gleason_pri.name}}" min="1" max="5"
+							value="{{paciente.Gleason_pri}}">
+						<p>Gleason Secundario</p>
+						<input type="number" name="{{form.Gleason_sec.name}}" min="1" max="5"
+							value="{{paciente.Gleason_sec}}">
+					</div>
+					<div class="campos">
+						<p>Nº cil pos</p>
+						<input type="number" name="{{form.Num_cil_pos.name}}" min="0" max="20" value="{{paciente.Num_cil_pos}}">
+						<p>Nº cil neg</p>
+						<input type="number" name="{{form.Num_cil_neg.name}}" min="0" max="20" value="{{paciente.Num_cil_neg}}">
+						<p>% cil. +</p>
+						<input type="number" step="0.01" name="{{form.Por_cil_pos.name}}" min="0" max="100"
+							value="{{paciente.Por_cil_pos}}">
+						<p>% max. afectación cil.</p>
+						<input type="number" step="0.01" name="{{form.Max_afeccion.name}}" min="0" max="100"
+							value="{{paciente.Max_afeccion}}">
+						<p>Bilateralidad</p>
+						<select name="{{form.Bilat.name}}">
+							<option value="0" {% if paciente.Bilat == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Bilat == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Bilat == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.Bilat == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>IPN</p>
+						<select name="{{form.IPN.name}}">
+							<option value="0" {% if paciente.IPN == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IPN == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IPN == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IPN == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>ILINF</p>
+						<select name="{{form.ILINF.name}}">
+							<option value="0" {% if paciente.ILINF == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.ILINF == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.ILINF == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.ILINF == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>IVASC</p>
+						<select name="{{form.IVASC.name}}">
+							<option value="0" {% if paciente.IVASC == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IVASC == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IVASC == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IVASC == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>cTNM biopsia</p>
+						<select name="{{form.cTNM_biopsia.name}}">
+							<option value="0" {% if paciente.cTNM_biopsia == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.cTNM_biopsia == 1 %} selected {% endif %}>cT1</option>
+							<option value="2" {% if paciente.cTNM_biopsia == 2 %} selected {% endif %}>cT2a</option>
+							<option value="3" {% if paciente.cTNM_biopsia == 3 %} selected {% endif %}>cT2b</option>
+							<option value="4" {% if paciente.cTNM_biopsia == 4 %} selected {% endif %}>cT2c</option>
+							<option value="5" {% if paciente.cTNM_biopsia == 5 %} selected {% endif %}>cT3a</option>
+							<option value="6" {% if paciente.cTNM_biopsia == 6 %} selected {% endif %}>cT3b</option>
+							<option value="7" {% if paciente.cTNM_biopsia == 7 %} selected {% endif %}>cT4</option>
+						</select>
+						<p>ISUP</p>
+						<input type="number" name="{{form.ISUP.name}}" min="0" max="5" value="{{paciente.ISUP}}">
+
+					</div>
+					<div class="campos">
+						<p>Fecha PRL</p>
+						<input type="date" name="{{form.Fecha_PRL.name}}" value="{{paciente.Fecha_PRL |date:'Y-m-d'}}">
+						<p>Tratamiento</p>
+						<select name="{{form.Tratamiento.name}}">
+							<option value="0" {% if paciente.Tratamiento == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Tratamiento == 1 %} selected {% endif %}>Prostatectomía radical
+							</option>
+							<option value="2" {% if paciente.Tratamiento == 2 %} selected {% endif %}>Radioterapia
+							</option>
+						</select>
+						<p>Gleason pieza PRL</p>
+						<select name="{{form.Gleason_pieza_PRL.name}}">
+							<option value="0" {% if paciente.Gleason_pieza_PRL == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Gleason_pieza_PRL == 1 %} selected {% endif %}>6</option>
+							<option value="2" {% if paciente.Gleason_pieza_PRL == 2 %} selected {% endif %}>7 (3+4)</option>
+							<option value="3" {% if paciente.Gleason_pieza_PRL == 3 %} selected {% endif %}>7 (4+3)</option>
+							<option value="4" {% if paciente.Gleason_pieza_PRL == 4 %} selected {% endif %}>8-10</option>
+							<option value="5" {% if paciente.Gleason_pieza_PRL == 5 %} selected {% endif %}> &lt;6</option>
+						</select>
+						<p>Gleason Primario</p>
+						<input type="number" name="{{form.Gleason_pri_2.name}}" min="1" max="5"
+							value="{{paciente.Gleason_pri_2}}">
+						<p>Gleason Secundario</p>
+						<input type="number" name="{{form.Gleason_sec_2.name}}" min="1" max="5"
+							value="{{paciente.Gleason_sec_2}}">
+						<p>Bilateralidad</p>
+						<select name="{{form.Bilat_2.name}}">
+							<option value="0" {% if paciente.Bilat_2 == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Bilat_2 == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Bilat_2 == 2 %} selected {% endif %}>No</option>
+						</select>
+						<p>Localización en pieza</p>
+						<select name="{{form.Localiz_en_pieza.name}}">
+							<option value="0" {% if paciente.Localiz_en_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Localiz_en_pieza == 1 %} selected {% endif %}>ZP</option>
+							<option value="2" {% if paciente.Localiz_en_pieza == 2 %} selected {% endif %}>ZT</option>
+							<option value="3" {% if paciente.Localiz_en_pieza == 3 %} selected {% endif %}>ZFMA</option>
+							<option value="4" {% if paciente.Localiz_en_pieza == 4 %} selected {% endif %}>Múltiple</option>
+						</select>
+						<p>Multifocalidad</p>
+						<select name="{{form.Multifocalidad.name}}">
+							<option value="0" {% if paciente.Multifocalidad == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.Multifocalidad == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.Multifocalidad == 2 %} selected {% endif %}>No</option>
+						</select>
+						<p>Volumen tumoral (% pieza)</p>
+						<input type="number" step="0.01" name="{{form.Volumen_tumoral.name}}" min="0" max="100"
+							value="{{paciente.Volumen_tumoral}}">
+					</div>
+					<div class="campos">
+						<p>ECC</p>
+						<select name="{{form.EEC.name}}">
+							<option value="0" {% if paciente.EEC == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.EEC == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.EEC == 2 %} selected {% endif %}>No</option>
+						</select>
+						<p>IVS</p>
+						<select name="{{form.IVS.name}}">
+							<option value="0" {% if paciente.IVS == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IVS == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IVS == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IVS == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>IPN pieza</p>
+						<select name="{{form.IPN_pieza.name}}">
+							<option value="0" {% if paciente.IPN_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IPN_pieza == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IPN_pieza == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IPN_pieza == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>ILINF pieza</p>
+						<select name="{{form.ILINF_pieza.name}}">
+							<option value="0" {% if paciente.ILINF_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.ILINF_pieza == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.ILINF_pieza == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.ILINF_pieza == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>IVASC pieza</p>
+						<select name="{{form.IVASC_pieza.name}}">
+							<option value="0" {% if paciente.IVASC_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.IVASC_pieza == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.IVASC_pieza == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.IVASC_pieza == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>PINAG</p>
+						<select name="{{form.PINAG.name}}">
+							<option value="0" {% if paciente.PINAG == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.PINAG == 1 %} selected {% endif %}>Sí</option>
+							<option value="2" {% if paciente.PINAG == 2 %} selected {% endif %}>No</option>
+							<option value="3" {% if paciente.PINAG == 3 %} selected {% endif %}>NC</option>
+						</select>
+						<p>MQP</p>
+						<select name="{{form.MQP.name}}">
+							<option value="0" {% if paciente.MQP == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.MQP == 1 %} selected {% endif %}>Sí, única pequeña
+							</option>
+							<option value="2" {% if paciente.MQP == 2 %} selected {% endif %}>Sí, multiple grande
+							</option>
+							<option value="3" {% if paciente.MQP == 3 %} selected {% endif %}>No</option>
+							<option value="4" {% if paciente.MQP == 4 %} selected {% endif %}>NC</option>
+						</select>
+						<p>TNM pieza</p>
+						<select name="{{form.TNM_pieza.name}}">
+							<option value="0" {% if paciente.TNM_pieza == -1 %} selected {% endif %}></option>
+							<option value="1" {% if paciente.TNM_pieza == 1 %} selected {% endif %}>pT2a</option>
+							<option value="2" {% if paciente.TNM_pieza == 2 %} selected {% endif %}>pT2b</option>
+							<option value="3" {% if paciente.TNM_pieza == 3 %} selected {% endif %}>pT2c</option>
+							<option value="4" {% if paciente.TNM_pieza == 4 %} selected {% endif %}>pT3a</option>
+							<option value="5" {% if paciente.TNM_pieza == 5 %} selected {% endif %}>pT3b</option>
+							<option value="6" {% if paciente.TNM_pieza == 6 %} selected {% endif %}>pT4</option>
+						</select>
+
+
+						<!-- <p>PSA POS(>0.2 no se considera RBQ)</p>
+						<input type="number" step="0.01" name="{{form.PSA_pos.name}}" min="0" value="{{paciente.PSA_pos}}"> -->
+						<p>T1º MTX(meses)</p>
+						<input type="number" name="{{form.T1_MTX.name}}" min="0" value="{{paciente.T1_MTX}}">
+						<p>Fecha última revisión</p>
+						<input type="date" name="{{form.Ultima_revision.name}}" value="{{paciente.Ultima_revision |date:'Y-m-d'}}">
+						<!-- <p>TSEG(meses)</p>
+						<input type="number" name="{{form.TSEG.name}}" min="0" value="{{paciente.TSEG}}"> -->
+						<!-- <p>Último PSA</p>
+						<input type="number" step="0.01" name="{{form.Ultimo_PSA.name}}" min="0" value="{{paciente.Ultimo_PSA}}"> -->
+					</div>
+				</div>
+				<input type="number" name="pestania" value="6" hidden>
+				<div class="boton">
+					<input class="confirmar" type="submit" name="confirmar" value="Confirmar">
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

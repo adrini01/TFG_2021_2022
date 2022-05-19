@@ -1,0 +1,470 @@
+{% load static %}
+<html lang="es">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'core/css/inicio_style.css' %}" />
+	<script type="text/javascript" src="{% static 'core/js/pestanias_form.js' %}"></script>
+	<script type="text/javascript" src="{% static 'core/vendor/jQuery.js' %}"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet" />
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>
+		function seleccionBE() {
+			var arrSeleccion = "{{seleccion}}".split(",");
+			arrSeleccion.forEach(element => $('#' + element).attr('checked', true));
+			seleccionar();
+		}
+
+		function seleccionar() {
+			var txt = "", numSelec = 1;
+			$('.checkvalues:checked').each(function () {
+				numSelec++;
+				if (numSelec > 12) {
+					window.alert("El número máximo de columnas es 12");
+					return -1;
+				}
+				else txt += $(this).val() + ",";
+				$("tr").css('grid-template-columns', ("repeat(" + numSelec + ", 1fr"));
+			});
+			if (numSelec <= 12) {
+				$('#seleccion1').val(txt);
+				$("tr").css('grid-template-columns', ("repeat(" + numSelec + ", 1fr"));
+				var arraySelec = txt.split(",");
+				$('.checkvalues').each(function () {
+					$("." + $(this).val()).hide();
+				});
+				for (var i = 0; i < arraySelec.length; i++) {
+					if (arraySelec[i]) {
+						$('.' + arraySelec[i]).each(function () {
+							$(this).removeAttr('hidden');
+							$(this).css('display', "inline");
+						});
+					}
+				}
+				$('#seleccion1').val(txt);
+			} else return -1;
+		}
+		$(document).ready(function () {
+			$('.checkvalues').click(function () {
+				if (seleccionar() == -1)
+					$(this).prop('checked', false);
+			});
+		});
+	</script>
+	<meta charset="UTF-8">
+	<title>Inicio</title>
+</head>
+
+<body id="body" onload="javascript:cambiarPestanna(1,6); javascript:seleccionBE();">
+	<script type="text/javascript" src="{% static 'core/vendor/jQuery.js' %}"></script>
+	<script>
+		function num2string(campo) {
+			if (campo == 'Etnia') {
+				return etniaArray = ['', 'Caucásico', 'Negro', 'Hispano', 'Asiático'];
+				return etniaArray[valor];
+			} else if (campo == 'Obesidad') {
+				return obesidadArray = ['', 'NC', 'IMC < 25', 'IMC 25-30', 'IMC > 30'];
+				return obesidadArray[valor];
+			} else if (campo == 'HTA') {
+				return htaArray = ['', 'Sí', 'No', 'NC'];
+				return htaArray[valor];
+			} else if (campo == 'Diabetes') {
+				return diabetesArray = ['', 'Sí', 'No', 'NC'];
+				return diabetesArray[valor];
+			} else if (campo == 'Tabaco') {
+				return tabacoArray = ['', 'NC', 'No', 'Exfumador', '< 10 cig/día', '10-20 cig/día', '> 20 cig/día'];
+				return tabacoArray[valor];
+			} else if (campo == 'Familiar_CAP') {
+				return familiarArray = ['', 'Sí', 'No'];
+				return familiarArray[valor];
+			} else if (campo == 'TR_preop') {
+				return trArray = ['', 'Negativo', 'Sospechoso', 'Positivo'];
+				return trArray[valor];
+			} else if (campo == 'Estadiaje_RM') {
+				return estadiajeArray = ['', 'T2', 'T3a', 'T3b', 'T4', 'NA'];
+				return estadiajeArray[valor];
+			} else if (campo == 'ISUP_RM') {
+				return isupArray = ['', '0', '1', '2', '3', '4', '5'];
+				return isupArray[valor];
+			} else if (campo == 'Tipo_histologico') {
+				return histoArray = ['', 'Adenocarcinoma', 'Otro'];
+				return histoArray[valor];
+			} else if (campo == 'Gleason_biopsia') {
+				return gleasonArray = ['', '6', '7 (3+4)', '7 (4+3)', '8-10', 'Inclasificable'];
+				return gleasonArray[valor];
+			} else if (campo == 'Bilat') {
+				return bilatArray = ['', 'Sí', 'No', 'NC'];
+				return bilatArray[valor];
+			} else if (campo == 'IPN') {
+				return ipnArray = ['', 'Sí', 'No', 'NC'];
+				return ipnArray[valor];
+			} else if (campo == 'ILINF') {
+				return ilinfArray = ['', 'Sí', 'No', 'NC'];
+				return ilinfArray[valor];
+			} else if (campo == 'IVASC') {
+				return ivascArray = ['', 'Sí', 'No', 'NC'];
+				return ivascArray[valor];
+			} else if (campo == 'cTNM_biopsia') {
+				return ctnmArray = ['', 'cT1', 'cT2a', 'cT2b', 'cT2c', 'cT3a', 'cT3b', 'cT4'];
+				return ctnmArray[valor];
+			} else if (campo == 'Tratamiento') {
+				return tratamientoArray = ['', 'Prostatectomía', 'Radioterapia'];
+				return tratamientoArray[valor];
+			} else if (campo == 'Gleason_pieza_PRL') {
+				return gleason2Array = ['', '6', '7 (3+4)', '7 (4+3)', '8-10', '< 6'];
+				return gleason2Array[valor];
+			} else if (campo == 'Bilat_2') {
+				return bilat2Array = ['', 'Sí', 'No'];
+				return bilat2Array[valor];
+			} else if (campo == 'Localiz_en_pieza') {
+				return localArray = ['', 'ZP', 'ZT', 'ZFMA', 'Múltiple'];
+				return localArray[valor];
+			} else if (campo == 'Multifocalidad') {
+				return multiArray = ['', 'Sí', 'No'];
+				return multiArray[valor];
+			} else if (campo == 'EEC') {
+				return eecArray = ['', 'Sí', 'No'];
+				return eecArray[valor];
+			} else if (campo == 'IVS') {
+				return ivsArray = ['', 'Sí', 'No', 'NC'];
+				return ivsArray[valor];
+			} else if (campo == 'IPN_pieza') {
+				return ipn2Array = ['', 'Sí', 'No', 'NC'];
+				return ipn2Array[valor];
+			} else if (campo == 'ILINF_pieza') {
+				return ilinf2Array = ['', 'Sí', 'No', 'NC'];
+				return ilinf2Array[valor];
+			} else if (campo == 'IVASC_pieza') {
+				return ivasc2Array = ['', 'Sí', 'No', 'NC'];
+				return ivasc2Array[valor];
+			} else if (campo == 'PINAG') {
+				return pinagArray = ['', 'Sí', 'No', 'NC'];
+				return pinagArray[valor];
+			} else if (campo == 'MQP') {
+				return mqpArray = ['', 'Sí, única pequeña', 'Sí, multiple grande', 'No', 'NC'];
+				return mqpArray[valor];
+			} else if (campo == 'TNM_pieza') {
+				return tnmArray = ['', 'pT2a', 'pT2b', 'pT2c', 'pT3a', 'pT3b', 'pT4'];
+				return tnmArray[valor];
+			}
+			return false;
+		}
+	</script>
+	<div id="pestanas">
+		<ul id=lista>
+			<li id="1"><a href='javascript:cambiarPestanna(1,6);'>Inicio</a></li>
+		</ul>
+		<div id="user">{{ user.username | upper}} <button><a id="cerrar" href="{% url 'logout' %}">Cerrar sesión</a></button></div>
+	</div>
+	<div id="contenidopestanas">
+		<div id="c1" class="cpestana">
+			<form id="formBuscador" method="get">
+				{% csrf_token %}
+				<div id="buscadorId" class="input-group">
+					<input id="pedirId" type="number" name="ID" class="form-control" placeholder="Introduzca el ID del paciente">
+					<div id="bottonBuscador" class="input-group-append">
+						<button id="buscador" type="submit" name="buscar" class="btn btn-secondary">
+							<i class="fa fa-search"></i>
+						  </button>
+					</div>
+				</div>
+				<!-- <input id="pedirId" type="number" name="ID" placeholder="Introduzca el ID del paciente">
+				<input id="buscador" type="submit" name="buscar" value="Buscar"> -->
+				<input id="crear" type="submit" name="crear" value="Añadir Paciente">
+			</form>
+
+			{% if messages %}
+			<div class="error">
+				{% for message in messages %}
+				<p class="error">{{ message }}</p>
+				{% endfor %}
+			</div>
+			{% endif %}
+
+			<div id="cabecera">
+				<div class="filtros">
+					<form method="get" class="filter-form">
+						{% csrf_token %}
+						<div id="titulo">
+							<p id="datos">Pacientes</p>
+
+						</div>
+						<div id="pestaniassec">
+							<div id="dropdownpest" class="dropdown">
+								<span id="mostrarSpan" class="text-order">Mostrar </span>
+								<button id="boton-col" class="btn btn-secondary dropdown-toggle" type="button"
+									id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">
+									Seleccione las columnas
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+									{% for columna in columnas %}
+									{% if columna != "ID" %}
+									<input type="checkbox" id="{{ columna }}" value="{{columna}}"
+										class="checkvalues">{{columna}}<br />
+									{% endif %}
+									{% endfor %}
+								</div>
+							</div>
+							<div id="filtrado">
+								<span id="filterCampo" class="text-order">Filtrar </span>
+								<select id="atributo1" name="atributo1" class="btn btn-secondary dropdown-toggle filter10">
+									{% for columna in columnas %}
+									<option value="{{columna}}">{{columna}}</option>
+									{% endfor %}
+								</select>
+								<select id="operador1" name="operador1" class="btn btn-secondary dropdown-toggle filter10">
+									<option value="&lt">&lt</option>
+									<option value="&lt=">&lt=</option>
+									<option value="=" selected>=</option>
+									<option value=">=">&gt=</option>
+									<option value=">">&gt</option>
+								</select>
+								<div id="div1">
+									<input type="number" name="texto1" class="text-filter filter40">
+								</div>
+
+								<script>
+									$(document).on('change', '#atributo1', function () {
+										var node = document.getElementById('div1');
+										$("#div1").empty();
+										var text = num2string($('select[name=atributo1] option').filter(':selected').val());
+										var nodeSon = '';
+										if (text) {
+											$("#operador1").css('display', "none");
+											$("#operador1").val("=");
+											nodeSon += '<select name="texto1" class="btn btn-secondary dropdown-toggle">';
+											for (var i = 0; i < text.length; i++) {
+												nodeSon += '<option value="' + i + '">' + text[i] + '</option>';
+											}
+											nodeSon += '</select>';
+										} else {
+											nodeSon += '<input type="number" name="texto1" class="text-filter">';
+											$("#operador1").css('display', "");
+										}
+										node.insertAdjacentHTML('beforeend', nodeSon);
+									});							
+								</script>
+
+
+								<select name="condicion1" class="btn btn-secondary dropdown-toggle filter40">
+									<option value="AND" selected>Y</option>
+									<option value="OR">O</option>
+								</select>
+
+								<select id="atributo2" name="atributo2" class="btn btn-secondary dropdown-toggle filter10">
+									{% for columna in columnas %}
+									<option value="{{columna}}">{{columna}}</option>
+									{% endfor %}
+								</select>
+								<select id="operador2" name="operador2" class="btn btn-secondary dropdown-toggle">
+									<option value="&lt">&lt</option>
+									<option value="&lt=">&lt=</option>
+									<option value="=" selected>=</option>
+									<option value=">=">&gt=</option>
+									<option value=">">&gt</option>
+								</select>
+								<div id="div2">
+									<input type="number" name="texto2" class="text-filter">
+								</div>
+
+								<script>
+									$(document).on('change', '#atributo2', function () {
+										var node = document.getElementById('div2');
+										$("#div2").empty();
+										var text = num2string($('select[name=atributo2] option').filter(':selected').val());
+										var nodeSon = '';
+										if (text) {
+											$("#operador2").css('display', "none");
+											$("#operador2").val("=");
+											nodeSon += '<select name="texto2" class="btn btn-secondary dropdown-toggle">';
+											for (var i = 0; i < text.length; i++) {
+												nodeSon += '<option value="' + i + '">' + text[i] + '</option>';
+											}
+											nodeSon += '</select>';
+										} else {
+											nodeSon += '<input type="number" name="texto2" class="text-filter">';
+											$("#operador2").css('display', "");
+										}
+										node.insertAdjacentHTML('beforeend', nodeSon);
+									});							
+								</script>
+
+								<input type="hidden" name="seleccion" value="1" id="seleccion1">
+							</div>
+						</div>
+						<div id="ordenacion">
+							<span class="text-order filter45">Ordenar</span>
+							<select name="orden1" class="btn btn-secondary dropdown-toggle filter10">
+								{% for columna in columnas %}
+								<option value="{{columna}}">{{columna}}</option>
+								{% endfor %}
+							</select>
+							<select name="asc1" class="btn btn-secondary dropdown-toggle filter50">
+								<option value="ASC" selected>ASC</option>
+								<option value="DESC">DESC</option>
+							</select>
+							<span id="span56" class="text-order">Y</span>
+							<select name="orden2" class="btn btn-secondary dropdown-toggle filter10">
+								{% for columna in columnas %}
+								<option value="{{columna}}">{{columna}}</option>
+								{% endfor %}
+							</select>
+							<select name="asc2" class="btn btn-secondary dropdown-toggle filter50">
+								<option value="ASC" selected>ASC</option>
+								<option value="DESC">DESC</option>
+							</select>
+							<span class="text-order filter55">Y</span>
+							<select name="orden3" class="btn btn-secondary dropdown-toggle filter10">
+								{% for columna in columnas %}
+								<option value="{{columna}}">{{columna}}</option>
+								{% endfor %}
+							</select>
+							<select name="asc3" class="btn btn-secondary dropdown-toggle filter50">
+								<option value="ASC" selected>ASC</option>
+								<option value="DESC">DESC</option>
+							</select>
+							<input id="bottonfiltro" type="submit" name="filtro" value="Filtrar/Ordenar"
+								class="btn btn-secondary">
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<table class="table-striped">
+				<tr>
+					{% for columna in columnas %}
+					{% if columna == "ID" %}
+					<th class="{{ columna }}">{{ columna }}</th>
+					{% elif 1 %}
+					<th class="{{ columna }}" hidden>{{ columna }}</th>
+					{% endif %}
+					{% endfor %}
+				</tr>
+
+				{% for paciente in pacientes %}
+				<tr>
+					<td class="ID">{{paciente.ID}}</td>
+					<td class="Fecha_Biopsia" hidden>{{paciente.Fecha_Biopsia|date:'d-m-Y'}}</td>
+					<td class="Fecha_Nacimiento" hidden>{{paciente.Fecha_Nacimiento|date:'d-m-Y'}}</td>
+					<td class="Edad" hidden>{{paciente.Edad}}</td>
+					<td class="Etnia" hidden>
+						<script>document.write(num2string('Etnia')['{{paciente.Etnia}}'] ? num2string('Etnia')['{{paciente.Etnia}}'] : '');</script>
+					</td>
+					<td class="Obesidad" hidden>
+						<script>document.write(num2string('Obesidad')['{{paciente.Obesidad}}'] ? num2string('Obesidad')['{{paciente.Obesidad}}'] : '');</script>
+					</td>
+					<td class="HTA" hidden>
+						<script>document.write(num2string('HTA')['{{paciente.HTA}}'] ? num2string('HTA')['{{paciente.HTA}}'] : '');</script>
+					</td>
+					<td class="Diabetes" hidden>
+						<script>document.write(num2string('Diabetes')['{{paciente.Diabetes}}'] ? num2string('Diabetes')['{{paciente.Diabetes}}'] : '');</script>
+					</td>
+					<td class="Tabaco" hidden>
+						<script>document.write(num2string('Tabaco')['{{paciente.Tabaco}}'] ? num2string('Tabaco')['{{paciente.Tabaco}}'] : '');</script>
+					</td>
+					<td class="Familiar_CAP" hidden>
+						<script>document.write(num2string('Familiar_CAP')['{{paciente.Familiar_CAP}}'] ? num2string('Familiar_CAP')['{{paciente.Familiar_CAP}}'] : '');</script>
+					</td>
+					<td class="TR_preop" hidden>
+						<script>document.write(num2string('TR_preop')['{{paciente.TR_preop}}'] ? num2string('TR_preop')['{{paciente.TR_preop}}'] : '');</script>
+					</td>
+					<td class="Estadiaje_RM" hidden>
+						<script>document.write(num2string('Estadiaje_RM')['{{paciente.Estadiaje_RM}}'] ? num2string('Estadiaje_RM')['{{paciente.Estadiaje_RM}}'] : '');</script>
+					</td>
+					<td class="Diam_max" hidden>{{paciente.Diam_max}}</td>
+					<td class="ISUP_RM" hidden>
+						<script>document.write(num2string('ISUP_RM')['{{paciente.ISUP_RM}}'] ? num2string('ISUP_RM')['{{paciente.ISUP_RM}}'] : '');</script>
+					</td>
+					<td class="Num_cil_pos" hidden>{{paciente.Num_cil_pos}}</td>
+					<td class="Num_cil_neg" hidden>{{paciente.Num_cil_neg}}</td>
+					<td class="Por_cores_pos" hidden>{{paciente.Por_cores_pos}}</td>
+					<td class="N_biopsias" hidden>{{paciente.N_biopsias}}</td>
+					<td class="Tipo_histologico" hidden>
+						<script>document.write(num2string('Tipo_histologico')['{{paciente.Tipo_histologico}}'] ? num2string('Tipo_histologico')['{{paciente.Tipo_histologico}}'] : '');</script>
+					</td>
+					<td class="Gleason_biopsia" hidden>
+						<script>document.write(num2string('Gleason_biopsia')['{{paciente.Gleason_biopsia}}'] ? num2string('Gleason_biopsia')['{{paciente.Gleason_biopsia}}'] : '');</script>
+					</td>
+					<td class="Gleason_pri" hidden>{{paciente.Gleason_pri}}</td>
+					<td class="Gleason_sec" hidden>{{paciente.Gleason_sec}}</td>
+					<td class="Por_cil_pos" hidden>{{paciente.Por_cil_pos}}</td>
+					<td class="Max_afeccion" hidden>{{paciente.Max_afeccion}}</td>
+					<td class="Bilat" hidden>
+						<script>document.write(num2string('Bilat')['{{paciente.Bilat}}'] ? num2string('Bilat')['{{paciente.Bilat}}'] : '');</script>
+					</td>
+					<td class="IPN" hidden>
+						<script>document.write(num2string('IPN')['{{paciente.IPN}}'] ? num2string('IPN')['{{paciente.IPN}}'] : '');</script>
+					</td>
+					<td class="ILINF" hidden>
+						<script>document.write(num2string('ILINF')['{{paciente.ILINF}}'] ? num2string('ILINF')['{{paciente.ILINF}}'] : '');</script>
+					</td>
+					<td class="IVASC" hidden>
+						<script>document.write(num2string('IVASC')['{{paciente.IVASC}}'] ? num2string('IVASC')['{{paciente.IVASC}}'] : '');</script>
+					</td>
+					<td class="cTNM_biopsia" hidden>
+						<script>document.write(num2string('cTNM_biopsia')['{{paciente.cTNM_biopsia}}'] ? num2string('cTNM_biopsia')['{{paciente.cTNM_biopsia}}'] : '');</script>
+					</td>
+					<td class="ISUP" hidden>{{paciente.ISUP}}</td>
+					<td class="Fecha_PRL" hidden>{{paciente.Fecha_PRL|date:'d-m-Y'}}</td>
+					<td class="Tratamiento" hidden>
+						<script>document.write(num2string('Tratamiento')['{{paciente.Tratamiento}}'] ? num2string('Tratamiento')['{{paciente.Tratamiento}}'] : '');</script>
+					</td>
+					<td class="Gleason_pieza_PRL" hidden>
+						<script>document.write(num2string('Gleason_pieza_PRL')['{{paciente.Gleason_pieza_PRL}}'] ? num2string('Gleason_pieza_PRL')['{{paciente.Gleason_pieza_PRL}}'] : '');</script>
+					</td>
+					<td class="Gleason_pri_2" hidden>{{paciente.Gleason_pri_2}}</td>
+					<td class="Gleason_sec_2" hidden>{{paciente.Gleason_sec_2}}</td>
+					<td class="Bilat_2" hidden>
+						<script>document.write(num2string('Bilat_2')['{{paciente.Bilat_2}}'] ? num2string('Bilat_2')['{{paciente.Bilat_2}}'] : '');</script>
+					</td>
+					<td class="Localiz_en_pieza" hidden>
+						<script>document.write(num2string('Localiz_en_pieza')['{{paciente.Localiz_en_pieza}}'] ? num2string('Localiz_en_pieza')['{{paciente.Localiz_en_pieza}}'] : '');</script>
+					</td>
+					<td class="Multifocalidad" hidden>
+						<script>document.write(num2string('Multifocalidad')['{{paciente.Multifocalidad}}'] ? num2string('Multifocalidad')['{{paciente.Multifocalidad}}'] : '');</script>
+					</td>
+					<td class="Volumen_tumoral" hidden>{{paciente.Volumen_tumoral}}</td>
+					<td class="EEC" hidden>
+						<script>document.write(num2string('EEC')['{{paciente.EEC}}'] ? num2string('EEC')['{{paciente.EEC}}'] : '');</script>
+					</td>
+					<td class="IVS" hidden>
+						<script>document.write(num2string('IVS')['{{paciente.IVS}}'] ? num2string('IVS')['{{paciente.IVS}}'] : '');</script>
+					</td>
+					<td class="IPN_pieza" hidden>
+						<script>document.write(num2string('IPN_pieza')['{{paciente.IPN_pieza}}'] ? num2string('IPN_pieza')['{{paciente.IPN_pieza}}'] : '');</script>
+					</td>
+					<td class="ILINF_pieza" hidden>
+						<script>document.write(num2string('ILINF_pieza')['{{paciente.ILINF_pieza}}'] ? num2string('ILINF_pieza')['{{paciente.ILINF_pieza}}'] : '');</script>
+					</td>
+					<td class="IVASC_pieza" hidden>
+						<script>document.write(num2string('IVASC_pieza')['{{paciente.IVASC_pieza}}'] ? num2string('IVASC_pieza')['{{paciente.IVASC_pieza}}'] : '');</script>
+					</td>
+					<td class="PINAG" hidden>
+						<script>document.write(num2string('PINAG')['{{paciente.PINAG}}'] ? num2string('PINAG')['{{paciente.PINAG}}'] : '');</script>
+					</td>
+					<td class="MQP" hidden>
+						<script>document.write(num2string('MQP')['{{paciente.MQP}}'] ? num2string('MQP')['{{paciente.MQP}}'] : '');</script>
+					</td>
+					<td class="TNM_pieza" hidden>
+						<script>document.write(num2string('TNM_pieza')['{{paciente.TNM_pieza}}'] ? num2string('TNM_pieza')['{{paciente.TNM_pieza}}'] : '');</script>
+					</td>
+					<td class="T1_MTX" hidden>{{paciente.T1_MTX}}</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+</body>
+
+</html>

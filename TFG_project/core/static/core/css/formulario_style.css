@@ -1,0 +1,273 @@
+* {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: #333333;
+}
+
+#pestanas {
+  font-size: 3ex;
+  font-weight: bold;
+  height: fit-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#pestanas li {
+  list-style-type: none;
+  float: left;
+  text-align: center;
+  margin: 0px 2px -2px -0px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border: 2px;
+  border-bottom: 3px;
+  padding: 10px 5px 0px 5px;
+  height: 100%;
+}
+
+#pestanas a:link {
+  text-decoration: none;
+  color: bisque;
+}
+
+#contenidopestanas {
+  clear: both;
+  border-top: 2px solid #3ea3f2;
+  height: 93%;
+}
+
+#contenidopestanas div {
+  padding: 10px 0px 45px 0px;
+}
+
+.cpestana {
+  min-height: -webkit-fill-available;
+}
+
+p#datos {
+  color: white;
+  font-weight: bolder;
+  font-size: xx-large;
+}
+
+p {
+  color: white;
+  font-weight: bold;
+  font-size: x-large;
+  padding-bottom: 10px;
+  padding-top: 20px;
+}
+
+.confirmar {
+  width: 20%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #3ea3f2;
+  color: white;
+  font-size: medium;
+  font-weight: bolder;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input {
+  border-radius: 5px;
+  width: 75%;
+  max-width: 260px;
+  padding: 5px;
+}
+
+select {
+  border-radius: 5px;
+  width: 75%;
+  max-width: 260px;
+  padding: 5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contenedor {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin-left: auto;
+  width: -webkit-fill-available;
+  margin-right: auto;
+}
+
+.campos {
+  padding: 0;
+  width: 50%;
+  text-align: center;
+}
+
+#c5 .campos {
+  text-align: left;
+  margin-right: 3em;
+  margin-left: 3em;
+}
+
+#c5 input{
+  width: 20em;
+}
+
+#c5 .confirmar{
+  width: 7em;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+#c5 .contenedor {
+  padding: 0;
+  margin-right: auto;
+  margin-left: auto;
+  width: fit-content;
+}
+
+.boton {
+  padding: 0;
+}
+
+#contenidopestanas .contenedor {
+  padding: 0;
+}
+
+#contenidopestanas .boton {
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#c6 p {
+  color: white;
+  font-weight: bold;
+  font-size: large;
+  padding-bottom: 10px;
+  padding-top: 20px;
+}
+
+#c6 input {
+  border-radius: 5px;
+  width: 75%;
+  max-width: 260px;
+  padding: 3px;
+}
+
+#c6 select {
+  border-radius: 5px;
+  width: 75%;
+  max-width: 260px;
+  padding: 3px;
+}
+
+#c6 .campos {
+  padding: 0;
+  width: 33.33%;
+  text-align: center;
+  background-color: #404040;
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+  padding-bottom: 2%;
+}
+
+#c6 .confirmar {
+  width: 20%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #3ea3f2;
+  color: bisque;
+  font-size: medium;
+  font-weight: bolder;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#c6 .boton {
+  padding-top: 2%;
+}
+
+#volver {
+  justify-content: space-between;
+  width: 15%;
+  display: flex;
+  align-items: center;
+  margin-right: 1%;
+}
+
+#volver button {
+  border-radius: 5px;
+  padding: 5px 15px 5px 15px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+button {
+  background-color: #3ea3f2;
+  color: white;
+  font-size: medium;
+  font-weight: bolder;
+  width: fit-content;
+}
+
+th,
+td {
+  width: 124px;
+  align-items: center;
+  padding: 10px;
+}
+
+tr {
+  width: fit-content;
+}
+
+table {
+  background-color: black;
+  border-radius: 5px;
+  width: fit-content;
+  margin-top: 5%;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+tbody {
+  width: fit-content;
+}
+
+.red {
+  background-color: red;
+}
+
+.black {
+  background-color: black;
+  color: white;
+}
+
+#principalTr {
+  background-color: #3ea3f2;
+  color: white;
+  font-size: 1.2em;
+}
+#columnasTr {
+background-color: lightgray;
+}
+
+.par{
+  background-color: white;
+}
+
+.impar{
+  background-color: #f2f2f2;
+}

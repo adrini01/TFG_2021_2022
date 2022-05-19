@@ -1,0 +1,125 @@
+* {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #36096d;
+    background-image: linear-gradient(180deg, #163465 0%, #37d5d6 74%);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    
+}
+
+div#centrado {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: white;
+    width: 20%;
+    height: 45%;
+    min-width: 200px;
+    max-width: 400px;
+    padding: 40px;
+    border: 2px solid gray;
+    border-radius: 10px;
+
+}
+
+div#margenes {
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    margin: 15% 40% 15% 40%;
+}
+
+p {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+form {
+    margin-top: 10%;
+}
+
+input {
+    text-align: center;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+p#titulo {
+    font-weight: bolder;
+    font-size: xx-large;
+    color: dimgray;
+}
+
+form p {
+    margin-top: 5%;
+}
+
+#welcome {
+    margin-top: 10%;
+    margin: auto;
+    left: 0;
+    right: 0;
+    width: 60%;
+    margin-bottom: 17%;
+}
+
+.error {
+    color: red;
+    font-size: medium;
+    padding: 0;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#inputbutton {
+    cursor: pointer;
+    color: #FFF;
+    text-shadow: 0 1px #3ea3f2;
+    font-size: 1.2em;
+    border: 0 none;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    outline: none;
+    background-color: #3ea3f2;
+    -webkit-box-shadow: 0 2px #3ea3f2, inset 0 0 #3ea3f2;
+    -moz-box-shadow: 0 2px #3ea3f2, inset 0 0 #3ea3f2;
+    box-shadow: 0 2px #3ea3f2, inset 0 0 #3ea3f2;
+    padding-left: 90px;
+    padding-right: 90px;
+    font-size: 1.5em;
+    margin-top: 20px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+
+.bottonConfirm {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#inputPass {
+    font-size: 1.4em;
+}
+
+#inputUser {
+    font-size: 1.4em;
+}
+
+#spanPass {
+    padding-right: 11%;
+}
+
+#spanUser {
+    padding-right:11%;
+}
